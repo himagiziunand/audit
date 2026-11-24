@@ -297,7 +297,7 @@
                 <div class="px-5 sm:px-6 py-3 bg-[#F3EBF9]/70 border-t border-purple-100 flex flex-wrap items-center justify-between gap-2 text-xs">
                     <div class="flex items-center gap-2 text-[#4C2275] font-semibold">
                         <svg class="w-4 h-4 text-[#6A359C] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                        <span>Standar Kedalaman: Setiap kolom jawaban wajib minimal <strong id="info-min-chars">150</strong> karakter atau <strong id="info-min-words">25</strong> kata.</span>
+                        <span>Standar Kedalaman: Setiap kolom jawaban wajib minimal <strong id="info-min-chars">300</strong> karakter dan <strong id="info-min-words">45</strong> kata.</span>
                     </div>
                     <span class="text-[11px] text-slate-500">Pilih gelombang Audit yang berstatus Aktif di bawah ini.</span>
                 </div>
@@ -397,7 +397,7 @@
                             </div>
                         </div>
                         <span id="form-min-badge" class="inline-flex items-center gap-1.5 text-[11px] font-bold px-3 py-1 rounded-lg bg-[#F3EBF9] text-[#6A359C] self-start sm:self-auto">
-                            Min. 150 karakter / 25 kata
+                            Min. 300 karakter dan 45 kata
                         </span>
                     </div>
 
@@ -413,7 +413,7 @@
                             <div class="text-xs text-amber-950 space-y-1">
                                 <p class="font-bold">Tombol Kirim Masih Terkunci</p>
                                 <p class="leading-relaxed">
-                                    Mohon lengkapi ketiga jawaban di atas hingga masing-masing mencapai batas minimal karakter atau kata agar hasil audit dapat diproses oleh Biro Audit Internal.
+                                    Mohon lengkapi seluruh jawaban di atas hingga masing-masing mencapai batas minimal karakter dan kata agar hasil audit dapat diproses oleh Biro Audit Internal.
                                 </p>
                             </div>
                         </div>
@@ -901,7 +901,7 @@ function doGet(e) {
             "Divisi Pengabdian Masyarakat"
         ];
 
-        const STORAGE_CONFIG_KEY = "hima_gizi_audit_cfg_v4";
+        const STORAGE_CONFIG_KEY = "hima_gizi_audit_cfg_v5";
         const STORAGE_DATA_KEY   = "hima_gizi_audit_data_v3";
 
         const EMBEDDED_SHEETS_URL = "https://script.google.com/macros/s/AKfycbxFH0zuooe9oibLxk1voIRT-TcnVbwr3IGGvstRqdbYKmBDOY67XpJq5SbcRVAe1mnv/exec";
@@ -910,8 +910,8 @@ function doGet(e) {
             periodeName: "Periode 2026",
             adminPassword: "audit2026",
             sheetsWebAppUrl: EMBEDDED_SHEETS_URL,
-            minChars: 400,
-            minWords: 60,
+            minChars: 300,
+            minWords: 45,
             waves: [
                 {
                     num: 1,
@@ -1103,8 +1103,8 @@ function formatIndoDateTime(dateObj) {
             if (rekapPeriode) rekapPeriode.textContent = config.periodeName;
             if (minCharsEl) minCharsEl.textContent = config.minChars;
             if (minWordsEl) minWordsEl.textContent = config.minWords;
-            if (badgeMin) badgeMin.textContent = `Min. ${config.minChars} karakter / ${config.minWords} kata`;
-
+            if (badgeMin) badgeMin.textContent = `Min. ${config.minChars} karakter dan ${config.minWords} kata`;
+            
             const filterWave = document.getElementById("filter-wave");
             if (filterWave) {
                 const prev = filterWave.value;
@@ -1370,10 +1370,10 @@ function formatIndoDateTime(dateObj) {
 
             const charRatio = Math.min(1, charCount / minC);
             const wordRatio = Math.min(1, wordCount / minW);
-            const bestRatio = Math.max(charRatio, wordRatio);
+            const bestRatio = (charRatio + wordRatio) / 2;
             const pct = Math.round(bestRatio * 100);
 
-            const isValid = (charCount >= minC) || (wordCount >= minW);
+            const isValid = (charCount >= minC) && (wordCount >= minW);
             fieldValidState[idx] = isValid;
 
             const barEl = document.getElementById(`progress-bar-${idx}`);

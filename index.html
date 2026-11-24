@@ -901,18 +901,17 @@ function doGet(e) {
             "Divisi Pengabdian Masyarakat"
         ];
 
-        const STORAGE_CONFIG_KEY = "hima_gizi_audit_cfg_v3";
+        const STORAGE_CONFIG_KEY = "hima_gizi_audit_cfg_v4";
         const STORAGE_DATA_KEY   = "hima_gizi_audit_data_v3";
 
-        // Opsional: Tempel URL /exec Google Apps Script di sini jika ingin otomatis aktif di semua HP saat di-upload
-        const EMBEDDED_SHEETS_URL = "https://script.google.com/macros/s/AKfycbz4oqFcqKndJx9gwC6mxV7ErrLjOlRSJTBLD6ycFLiGOYG9985MRZJM2ts425klz-sf/exec";
+        const EMBEDDED_SHEETS_URL = "https://script.google.com/macros/s/AKfycbxFH0zuooe9oibLxk1voIRT-TcnVbwr3IGGvstRqdbYKmBDOY67XpJq5SbcRVAe1mnv/exec";
 
         const DEFAULT_CONFIG = {
             periodeName: "Periode 2026",
             adminPassword: "audit2026",
             sheetsWebAppUrl: EMBEDDED_SHEETS_URL,
-            minChars: 150,
-            minWords: 25,
+            minChars: 400,
+            minWords: 60,
             waves: [
                 {
                     num: 1,
@@ -1246,10 +1245,10 @@ function formatIndoDateTime(dateObj) {
             }
 
             const spinIcon = document.getElementById("icon-sync-spin");
-            if (spinIcon) spinIcon.classList.add("animate-spin");
+            if (spinIcon && notifyUser) spinIcon.classList.add("animate-spin");
 
             const listContainer = document.getElementById("submissions-list-container");
-            if (listContainer) {
+            if (listContainer && notifyUser) {
                 listContainer.innerHTML = `
                     <div class="space-y-4">
                         <div class="skeleton-shimmer h-36 w-full"></div>
@@ -1261,10 +1260,40 @@ function formatIndoDateTime(dateObj) {
             try {
                 const res = await fetch(url);
                 const json = await res.json();
-                if (json && json.status === "success" && Array.isArray(json.data)) {
-                    submissions = json.data;
-                    saveSubmissions();
-                    renderAdminDashboard();
+                if (json && json.status === "success") {
+                    // Terapkan pengaturan terbaru dari Google Sheets ke semua HP
+                    if (json.config && typeof json.config === "object") {
+                        const prevConfigStr = JSON.stringify(config);
+                        const mergedConfig = Object.assign({}, DEFAULT_CONFIG, json.config, {
+                            sheetsWebAppUrl: url
+                        });
+
+                        if (JSON.stringify(mergedConfig) !== prevConfigStr) {
+                            config = mergedConfig;
+                            saveConfig();
+                            syncHeaderAndLabels();
+                            if (!config.waves[selectedWaveIdx] || !config.waves[selectedWaveIdx].isOpen) {
+                                selectedWaveIdx = findFirstOpenWaveIndex();
+                            }
+                            renderWaveCards();
+                            const isTyping = Array.from(document.querySelectorAll(".audit-answer-textarea"))
+                                .some(ta => ta.value.trim().length > 0);
+                            if (!isTyping) {
+                                renderDynamicQuestions();
+                            }
+                            if (isSettingsUnlocked) {
+                                renderSettingsView();
+                            }
+                        }
+                    }
+
+                    // Perbarui data rekap audit
+                    if (Array.isArray(json.data)) {
+                        submissions = json.data;
+                        saveSubmissions();
+                        renderAdminDashboard();
+                    }
+
                     const syncText = document.getElementById("sheets-last-sync-text");
                     if (syncText) syncText.textContent = `Terakhir sinkronisasi: ${formatIndoDateTime(new Date())}`;
 
@@ -1272,7 +1301,7 @@ function formatIndoDateTime(dateObj) {
                         showModal({
                             type: "success",
                             title: "Sinkronisasi Berhasil!",
-                            message: `Berhasil memuat ${submissions.length} laporan audit terbaru dari Google Sheets.`
+                            message: `Berhasil memuat ${submissions.length} laporan audit dan pengaturan terbaru dari Google Sheets.`
                         });
                     }
                 }
@@ -1935,6 +1964,18 @@ function formatIndoDateTime(dateObj) {
 
             if (config.sheetsWebAppUrl) {
                 syncFromGoogleSheets(false);
+
+                setInterval(() => {
+                    if (!document.hidden) {
+                        syncFromGoogleSheets(false);
+                    }
+                }, 15000);
+
+                document.addEventListener("visibilitychange", () => {
+                    if (!document.hidden) {
+                        syncFromGoogleSheets(false);
+                    }
+                });
             }
 
             // 1. Klik Navigasi Tab
@@ -2025,14 +2066,42 @@ function formatIndoDateTime(dateObj) {
                 renderWaveCards();
                 renderDynamicQuestions();
                 renderSettingsView();
+
+                const saveBtn = document.getElementById("btn-save-settings");
+                const origText = saveBtn.textContent;
+                saveBtn.disabled = true;
+                saveBtn.textContent = "Menyimpan ke Cloud...";
+
+                let cloudNote = "";
+                const sheetsUrl = (config.sheetsWebAppUrl || "").trim();
+                if (sheetsUrl) {
+                    try {
+                        await fetch(sheetsUrl, {
+                            method: "POST",
+                            mode: "no-cors",
+                            headers: { "Content-Type": "text/plain;charset=utf-8" },
+                            body: JSON.stringify({
+                                action: "saveConfig",
+                                config: config
+                            })
+                        });
+                        cloudNote = " Perubahan otomatis tersinkron ke semua HP pengurus.";
+                    } catch (err) {
+                        cloudNote = " (Tersimpan lokal; gagal sinkron ke Google Sheets).";
+                    }
+                }
+
+                saveBtn.disabled = false;
+                saveBtn.textContent = origText;
+
                 showModal({
                     type: "success",
                     title: "Pengaturan Berhasil Disimpan!",
                     subtitle: `${config.periodeName} • ${config.waves.length} Gelombang`,
-                    message: "Seluruh perubahan periode, gelombang audit, pertanyaan, dan koneksi Google Sheets telah diterapkan."
+                    message: `Seluruh perubahan periode, password, gelombang audit, dan pertanyaan telah diterapkan.${cloudNote}`
                 });
             });
-
+    
             document.getElementById("btn-add-wave").addEventListener("click", () => {
                 captureSettingsInputs();
                 const nextNum = config.waves.length + 1;

@@ -2058,7 +2058,7 @@ function formatIndoDateTime(dateObj) {
                 renderSettingsView();
             });
 
-            document.getElementById("btn-save-settings").addEventListener("click", () => {
+            document.getElementById("btn-save-settings").addEventListener("click", async () => {
                 captureSettingsInputs();
                 saveConfig();
                 syncHeaderAndLabels();

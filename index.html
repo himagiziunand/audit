@@ -1,15 +1,20 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audit - Himpunan Mahasiswa Gizi KM FKM UNAND</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <meta name="description" content="Portal Evaluasi dan Pengawasan Internal Kepengurusan Himpunan Mahasiswa Gizi KM FKM UNAND - Biro Audit Internal.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Portal Audit Internal — Himpunan Mahasiswa Gizi KM FKM UNAND">
+    <meta property="og:description" content="Sarana resmi evaluasi dan pengawasan internal kepengurusan oleh Biro Audit Internal.">
+    <meta property="og:image" content="logo-hima.png">
+    <title>Audit - HIMAGI KM FKM UNAND</title>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -23,103 +28,280 @@
         }
     </script>
     <style>
+        :root {
+            --forest-deep: #163829;
+            --forest-main: #23533E;
+            --forest-mid: #2D6A4F;
+            --sage-tint: #D2E3D8;
+            --sage-border: #B7C4B9;
+            --accent-gold: #EBCB38;
+            --accent-amber: #F39237;
+        }
+
         html {
             overflow-y: scroll;
             scrollbar-width: thin;
-            scrollbar-color: #cbd5e1 transparent;
+            scrollbar-color: #9bb1a3 transparent;
         }
 
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        ::-webkit-scrollbar-thumb { background: #b7c4b9; border-radius: 9999px; }
+        ::-webkit-scrollbar-thumb:hover { background: #749682; }
 
-        .progress-bar-fill {
-            transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s ease;
-        }
-
-        /* ========================================================= */
-        /* CLEAN TACTILE MICRO-INTERACTIONS (NYAMAN & PROFESIONAL)   */
-        /* ========================================================= */
-
-        /* Tombol & Pilihan Kartu Kecil (Gelombang & Mode Identitas) */
-        button:not(:disabled),
-        label.cursor-pointer > div {
-            transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
-                        box-shadow 0.2s ease,
-                        border-color 0.2s ease,
-                        background-color 0.2s ease;
-        }
-        button:not(:disabled):hover,
-        label.cursor-pointer:hover > div {
-            transform: translateY(-1.5px);
-            box-shadow: 0 6px 16px -6px rgba(35, 83, 62, 0.22);
-        }
-        button:not(:disabled):active,
-        label.cursor-pointer:active > div {
-            transform: scale(0.97) !important;
-        }
-
-        /* Kartu Rekap Audit di Tab Admin */
-        #submissions-list-container article {
-            transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
-        }
-        #submissions-list-container article:hover {
-            transform: translateY(-2px);
-            border-color: #749682;
-            box-shadow: 0 10px 22px -8px rgba(35, 83, 62, 0.16);
-        }
-
-        /* Transisi Halus saat Pindah Tab */
-        section:not(.hidden) {
-            animation: tabFadeSlide 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        @keyframes tabFadeSlide {
-            from { opacity: 0; transform: translateY(8px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Skeleton Shimmer Loading */
-        .skeleton-shimmer {
+        body {
+            background-color: #F2F5F3;
+            color: #1e293b;
             position: relative;
-            overflow: hidden;
-            background-color: #e2e8f0;
-            border-radius: 0.75rem;
+            overflow-x: hidden;
         }
-        .skeleton-shimmer::after {
+
+        .ambient-bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .ambient-orb {
+            position: absolute;
+            border-radius: 9999px;
+            will-change: transform;
+        }
+        .ambient-orb-1 {
+            width: 540px;
+            height: 540px;
+            top: -140px;
+            left: -100px;
+            background: radial-gradient(circle, rgba(45, 106, 79, 0.11) 0%, rgba(45, 106, 79, 0) 70%);
+            animation: floatAmbientOne 22s ease-in-out infinite alternate;
+        }
+        .ambient-orb-2 {
+            width: 500px;
+            height: 500px;
+            bottom: -140px;
+            right: -90px;
+            background: radial-gradient(circle, rgba(235, 203, 56, 0.12) 0%, rgba(235, 203, 56, 0) 70%);
+            animation: floatAmbientTwo 26s ease-in-out infinite alternate;
+        }
+        @keyframes floatAmbientOne {
+            0%   { transform: translate3d(0, 0, 0) scale(1); }
+            100% { transform: translate3d(55px, 40px, 0) scale(1.06); }
+        }
+        @keyframes floatAmbientTwo {
+            0%   { transform: translate3d(0, 0, 0) scale(1); }
+            100% { transform: translate3d(-50px, -35px, 0) scale(1.07); }
+        }
+
+        #dynamic-header-wrapper {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            width: 100%;
+            padding-top: 12px;
+        }
+
+        #main-navbar {
+            width: 100%;
+            border-radius: 9999px;
+            background: linear-gradient(135deg, #163829 0%, #23533E 55%, #1B4332 100%);
+            border: 1px solid rgba(210, 227, 216, 0.35);
+            box-shadow: 0 8px 20px -6px rgba(15, 41, 30, 0.25);
+            transition: box-shadow 0.25s ease, transform 0.25s ease;
+        }
+
+        #navbar-inner {
+            padding: 8px 10px 8px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        #navbar-logo-ring {
+            width: 40px;
+            height: 40px;
+            transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        #main-navbar:hover #navbar-logo-ring {
+            transform: rotate(-4deg) scale(1.04);
+        }
+
+        #navbar-tablist {
+            background-color: rgba(11, 31, 22, 0.72);
+            border-color: rgba(183, 196, 185, 0.25);
+            border-radius: 9999px;
+            padding: 3px;
+        }
+
+        .nav-tab-btn {
+            border-radius: 9999px;
+            transition: background-color 0.2s ease, color 0.2s ease, transform 0.18s ease, box-shadow 0.2s ease;
+        }
+        .nav-tab-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 767px) {
+            #dynamic-header-wrapper {
+                padding-top: 10px;
+            }
+            #main-navbar {
+                border-radius: 22px;
+            }
+            #navbar-inner {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 10px 12px;
+                gap: 8px;
+            }
+            #navbar-tablist {
+                width: 100%;
+                justify-content: space-between;
+            }
+            .nav-tab-btn {
+                flex: 1;
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+        }
+
+        .surface-card {
+            position: relative;
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px rgba(22, 56, 41, 0.06), 0 8px 20px -12px rgba(22, 56, 41, 0.12);
+            transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+            transform-style: preserve-3d;
+            will-change: transform;
+            --mouse-x: 50%;
+            --mouse-y: 50%;
+        }
+
+        .surface-card:hover {
+            box-shadow: 0 12px 28px -10px rgba(22, 56, 41, 0.16), 0 2px 6px rgba(22, 56, 41, 0.05);
+            border-color: rgba(116, 150, 130, 0.85);
+        }
+
+        .spotlight-card::after {
             content: "";
             position: absolute;
             inset: 0;
-            transform: translateX(-100%);
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
-            animation: shimmerMove 1.4s infinite;
+            border-radius: inherit;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            background: radial-gradient(
+                420px circle at var(--mouse-x) var(--mouse-y),
+                rgba(45, 106, 79, 0.075),
+                transparent 65%
+            );
+            z-index: 1;
         }
-        @keyframes shimmerMove {
-            100% { transform: translateX(100%); }
+        .spotlight-card:hover::after {
+            opacity: 1;
         }
-        /* ========================================================= */
-        /* TEMA WARNA BAJU KERJA (HIJAU BOTOL JILBAB & SAGE BAJU)    */
-        /* ========================================================= */
 
-        /* 1. Latar Belakang Halaman (Sage Sangat Lembut) */
-        body {
-            background-color: #F2F5F3 !important;
+        @keyframes staggeredFadeUp {
+            0% {
+                opacity: 0;
+                transform: translate3d(0, 14px, 0);
+            }
+            100% {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
         }
 
-        /* 2. Header Atas & Banner Utama (Hijau Botol Tua Jilbab) */
-        header {
-            background: linear-gradient(135deg, #163829 0%, #23533E 55%, #1B4332 100%) !important;
-            border-bottom-color: rgba(15, 41, 30, 0.5) !important;
+        .stagger-item {
+            animation: staggeredFadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
         }
-        header nav {
-            background-color: rgba(13, 36, 26, 0.75) !important;
-            border-color: rgba(183, 196, 185, 0.25) !important;
+        .stagger-delay-1 { animation-delay: 0.04s; }
+        .stagger-delay-2 { animation-delay: 0.11s; }
+        .stagger-delay-3 { animation-delay: 0.18s; }
+        .stagger-delay-4 { animation-delay: 0.25s; }
+
+        .progress-bar-fill {
+            transition: width 0.25s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.25s ease;
         }
+
+        .tactile-btn:not(:disabled) {
+            min-height: 44px;
+            transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.2s ease;
+        }
+        .tactile-btn:not(:disabled):hover {
+            transform: translateY(-1.5px);
+            box-shadow: 0 6px 14px -4px rgba(22, 56, 41, 0.22);
+        }
+        .tactile-btn:not(:disabled):active {
+            transform: scale(0.975) translateY(0);
+        }
+
+        .choice-tile {
+            min-height: 54px;
+            transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .choice-tile:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px -6px rgba(22, 56, 41, 0.14);
+        }
+        .peer:checked ~ .choice-tile {
+            transform: scale(1.008);
+            box-shadow: 0 6px 16px -6px rgba(45, 106, 79, 0.22);
+        }
+
+        input, textarea, select {
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.18s ease, background-color 0.2s ease;
+        }
+        input:focus, textarea:focus, select:focus {
+            box-shadow: 0 0 0 3.5px rgba(45, 106, 79, 0.16);
+            transform: translateY(-1px);
+        }
+
+        #top-loading-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            z-index: 60;
+            background: linear-gradient(90deg, #2D6A4F, #EBCB38, #23533E);
+            transition: width 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.22s ease;
+            pointer-events: none;
+        }
+
+        @keyframes shimmerSweep {
+            0%   { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .skeleton-shimmer {
+            background: linear-gradient(90deg, #e3eae5 25%, #eff4f1 50%, #e3eae5 75%);
+            background-size: 200% 100%;
+            animation: shimmerSweep 1.5s infinite linear;
+            border-radius: 0.75rem;
+        }
+
+        .footer-capsule {
+            background: linear-gradient(135deg, #163829 0%, #23533E 60%, #1B4332 100%);
+            border: 1px solid rgba(210, 227, 216, 0.35);
+            box-shadow: 0 8px 20px -6px rgba(15, 41, 30, 0.25);
+            padding: 8px 10px 8px 14px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .footer-capsule:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 26px -8px rgba(15, 41, 30, 0.3);
+        }
+        #footer-logo-ring {
+            transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .footer-capsule:hover #footer-logo-ring {
+            transform: rotate(-4deg) scale(1.04);
+        }
+
         #section-form > div:first-child > div:first-child {
             background: linear-gradient(135deg, #1B4332 0%, #2D6A4F 60%, #22543D 100%) !important;
         }
 
-        /* 3. Tombol Utama & Badge Gelombang (Hijau Botol Tua) */
         .bg-\[\#6A359C\] {
             background-color: #23533E !important;
         }
@@ -127,7 +309,6 @@
             background-color: #163829 !important;
         }
 
-        /* 4. Teks Aksen Utama (Hijau Botol Tua) */
         .text-\[\#6A359C\],
         .text-\[\#4C2275\] {
             color: #1B4332 !important;
@@ -136,7 +317,6 @@
             color: #163829 !important;
         }
 
-        /* 5. Latar Lembut & Kotak Pilihan Aktif (Hijau Sage Baju) */
         .bg-\[\#F3EBF9\],
         .bg-\[\#F3EBF9\]\/70,
         .bg-\[\#F3EBF9\]\/60,
@@ -155,7 +335,6 @@
             background-color: #D2DDD5 !important;
         }
 
-        /* 6. Garis Tepi / Border & Ring Fokus (Sage & Hijau Botol) */
         .border-\[\#6A359C\],
         .peer:checked ~ div.peer-checked\:border-\[\#6A359C\],
         .focus\:border-\[\#6A359C\]:focus {
@@ -174,188 +353,207 @@
             border-color: #749682 !important;
         }
 
-        /* 7. Subteks Header & Banner (Putih Cerah) */
         header .text-purple-100,
         #section-form .text-purple-100 {
             color: #F0F5F2 !important;
-        }        
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
     </style>
     <link rel="icon" type="image/png" href="logo-hima.png">
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+<body class="text-slate-800 antialiased min-h-screen flex flex-col">
 
-    <!-- =================================================================== -->
-    <!-- HEADER & BRANDING RESMI Himpunan Mahasiswa Gizi KM FKM UNAND        -->
-    <!-- =================================================================== -->
-    <header class="bg-gradient-to-r from-[#4C2275] via-[#6A359C] to-[#562882] text-white shadow-lg sticky top-0 z-40 border-b border-purple-900/40">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-            
-            <!-- Logo Resmi + Judul Audit -->
-            <div class="flex items-center gap-3.5">
-                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white p-1.5 shadow-md flex items-center justify-center shrink-0 border-2 border-[#EBCB38] overflow-hidden">
-                    <img src="logo-hima.png" alt="Logo Hima Gizi" class="w-full h-full object-contain">
-                </div>
-                <div>
-                    <h1 class="font-display font-extrabold text-xl sm:text-2xl tracking-tight text-white leading-none">
-                        Audit
-                    </h1>
-                    <p id="header-subtitle" class="text-xs sm:text-sm text-purple-100 font-semibold mt-1.5 flex flex-wrap items-center gap-1.5">
-                        <span>Himpunan Mahasiswa Gizi KM FKM UNAND</span>
-                        <span class="text-[#EBCB38]">•</span>
-                        <span id="header-periode-text" class="px-2 py-0.5 rounded-full bg-[#EBCB38] text-[#3B175E] text-[11px] font-bold">Periode 2026</span>
-                    </p>
-                </div>
-            </div>
+    <div class="ambient-bg" aria-hidden="true">
+        <div class="ambient-orb ambient-orb-1"></div>
+        <div class="ambient-orb ambient-orb-2"></div>
+    </div>
 
-            <!-- Navigasi 3 Tab Utama -->
-            <nav class="flex bg-[#361654]/80 p-1 rounded-xl border border-purple-300/20 w-full md:w-auto" role="tablist">
-                <button type="button" id="tab-btn-form" data-tab="form"
-                    class="nav-tab-btn flex-1 md:flex-initial flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-lg text-xs font-bold transition-all bg-white text-[#4C2275] shadow-sm cursor-pointer">
-                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
-                    <span>Isi Audit</span>
-                </button>
-                <button type="button" id="tab-btn-admin" data-tab="admin"
-                    class="nav-tab-btn flex-1 md:flex-initial flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-lg text-xs font-bold transition-all text-purple-100 hover:text-white cursor-pointer">
-                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-                    <span>Rekap Audit</span>
-                    <span id="badge-total-count" class="ml-0.5 px-1.5 py-0.2 text-[10px] rounded-full bg-[#F39237] text-white font-extrabold">0</span>
-                </button>
-                <button type="button" id="tab-btn-settings" data-tab="settings"
-                    class="nav-tab-btn flex-1 md:flex-initial flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-lg text-xs font-bold transition-all text-purple-100 hover:text-white cursor-pointer">
-                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    <span>Pengaturan</span>
-                </button>
-            </nav>
+    <div id="top-loading-bar"></div>
+
+    <!-- NAVBAR -->
+    <div id="dynamic-header-wrapper" class="stagger-item">
+        <div class="max-w-7xl w-full mx-auto px-4 sm:px-6">
+            <header id="main-navbar" class="text-white">
+                <div id="navbar-inner">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <div id="navbar-logo-ring" class="rounded-full bg-white p-0.5 shadow-sm flex items-center justify-center shrink-0 border-2 border-[#EBCB38] overflow-hidden">
+                            <img src="logo-hima.png" alt="Logo Hima Gizi" width="40" height="40" fetchpriority="high" decoding="async" class="w-full h-full object-contain">
+                        </div>
+                        <div id="navbar-brand-text" class="min-w-0">
+                            <h1 id="navbar-title" class="font-display font-extrabold text-base sm:text-lg tracking-tight text-white leading-none">
+                                Audit
+                            </h1>
+                            <p id="header-subtitle" class="text-[11px] text-purple-100 font-medium mt-1 flex flex-wrap items-center gap-1.5">
+                                <span>Himpunan Mahasiswa Gizi KM FKM UNAND</span>
+                                <span class="text-[#EBCB38]">•</span>
+                                <span id="header-periode-text" class="px-2 py-0.5 rounded-full bg-[#EBCB38] text-[#163829] text-[10px] font-bold">Periode 2026</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <nav id="navbar-tablist" aria-label="Menu Utama Portal Audit" class="flex border w-auto gap-1 shrink-0" role="tablist">
+                        <button type="button" id="tab-btn-form" data-tab="form" title="Isi Audit"
+                            class="nav-tab-btn min-h-[34px] flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-bold bg-white text-[#163829] shadow-sm cursor-pointer">
+                            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                            <span class="nav-tab-label">Isi Audit</span>
+                        </button>
+                        <button type="button" id="tab-btn-admin" data-tab="admin" title="Rekap Audit"
+                            class="nav-tab-btn min-h-[34px] flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-bold text-purple-100 hover:text-white cursor-pointer">
+                            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                            <span class="nav-tab-label">Rekap Audit</span>
+                            <span id="badge-total-count" class="ml-0.5 px-1.5 py-0.5 text-[10px] rounded-full bg-[#F39237] text-white font-extrabold">0</span>
+                        </button>
+                        <button type="button" id="tab-btn-settings" data-tab="settings" title="Pengaturan"
+                            class="nav-tab-btn min-h-[34px] flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-bold text-purple-100 hover:text-white cursor-pointer">
+                            <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            <span class="nav-tab-label">Pengaturan</span>
+                        </button>
+                    </nav>
+                </div>
+            </header>
         </div>
-    </header>
+    </div>
 
-    <!-- =================================================================== -->
-    <!-- KONTEN UTAMA                                                        -->
-    <!-- =================================================================== -->
-    <main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
+    <!-- MAIN -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-5 sm:py-7">
 
-        <!-- =============================================================== -->
-        <!-- TAB 1: ISI AUDIT (FORMULIR PENGISIAN)                           -->
-        <!-- =============================================================== -->
+        <!-- TAB 1: ISI AUDIT -->
         <section id="section-form" class="space-y-6">
-
-            <!-- Banner Info & Hari/Tanggal Otomatis Real-Time -->
-            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-                <div class="bg-gradient-to-r from-[#5B2C86] via-[#6A359C] to-[#7D3AC1] px-5 sm:px-6 py-5 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="surface-card spotlight-card tilt-card stagger-item stagger-delay-1 rounded-2xl border border-[#B7C4B9]/75 overflow-hidden">
+                <div class="bg-gradient-to-r from-[#1B4332] via-[#2D6A4F] to-[#22543D] px-5 sm:px-6 py-5 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div class="space-y-1">
                         <h2 class="font-display text-lg sm:text-xl font-extrabold tracking-tight">
-                            Evaluasi & Pengawasan Internal Kepengurusan
+                            Evaluasi &amp; Pengawasan Internal Kepengurusan
                         </h2>
                         <p class="text-purple-100 text-xs sm:text-sm leading-relaxed max-w-2xl">
                             Sarana untuk mengidentifikasi kendala internal dan merumuskan solusi perbaikan selama satu periode kepengurusan.
                         </p>
                     </div>
-                    <!-- Kotak Hari & Tanggal Otomatis -->
-                    <div class="bg-white/15 backdrop-blur-xs border border-white/25 rounded-xl px-4 py-2.5 shrink-0">
+                    <div class="bg-white/15 border border-white/25 rounded-xl px-4 py-2.5 shrink-0">
                         <div class="text-[10px] font-bold uppercase tracking-wider text-[#EBCB38] flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-[#EBCB38] animate-pulse"></span>
                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                            <span>Hari & Tanggal Pengisian</span>
+                            <span>Hari &amp; Tanggal Pengisian</span>
                         </div>
-<div id="live-datetime-display" class="text-xs sm:text-sm font-bold text-white mt-0.5 tabular-nums whitespace-nowrap">
+                        <div id="live-datetime-display" class="text-xs sm:text-sm font-bold text-white mt-0.5 tabular-nums whitespace-nowrap">
                             Memuat waktu...
                         </div>
                     </div>
                 </div>
 
-                <!-- Info Standar Minimal Karakter / Kata -->
-                <div class="px-5 sm:px-6 py-3 bg-[#F3EBF9]/70 border-t border-purple-100 flex flex-wrap items-center justify-between gap-2 text-xs">
+                <div class="px-5 sm:px-6 py-3.5 bg-[#F3EBF9]/70 border-t border-purple-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
                     <div class="flex items-center gap-2 text-[#4C2275] font-semibold">
                         <svg class="w-4 h-4 text-[#6A359C] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                        <span>Standar Kedalaman: Setiap kolom jawaban wajib minimal <strong id="info-min-chars">300</strong> karakter dan <strong id="info-min-words">45</strong> kata.</span>
+                        <span>Standar Kedalaman: Setiap jawaban minimal <strong id="info-min-chars">300</strong> karakter dan <strong id="info-min-words">45</strong> kata.</span>
                     </div>
-                    <span class="text-[11px] text-slate-500">Pilih gelombang Audit yang berstatus Aktif di bawah ini.</span>
+                    <div class="flex items-center gap-2 self-start sm:self-auto">
+                        <span id="step-indicator-badge" class="px-3 py-1 rounded-lg bg-white border border-[#B7C4B9] text-[#163829] font-bold text-[11px] shadow-sm">
+                            Langkah 1 dari 2 • Identitas
+                        </span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Form Pengisian Audit -->
             <form id="audit-form" class="space-y-6" novalidate>
-
-                <!-- Langkah 1: Gelombang Audit & Identitas Pengisi -->
-                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-6">
-                    <div class="flex items-center gap-2.5 border-b border-slate-100 pb-3.5">
-                        <span class="w-7 h-7 rounded-full bg-[#6A359C] text-white font-display font-bold text-xs flex items-center justify-center shrink-0">1</span>
-                        <div>
-                            <h3 class="font-display font-bold text-base text-slate-900">Gelombang Audit & Identitas Pengisi</h3>
-                            <p class="text-xs text-slate-500">Gelombang yang terkunci tidak dapat dipilih. Inti / Biro / Divisi wajib dipilih meskipun Anonim.</p>
+                <div id="form-step-1" class="surface-card spotlight-card stagger-item stagger-delay-2 rounded-2xl border border-[#B7C4B9]/75 p-5 sm:p-6 space-y-6">
+                    <div class="flex items-center justify-between gap-3 border-b border-slate-200/70 pb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="px-2.5 py-1 rounded-lg bg-[#6A359C] text-white font-display font-bold text-[11px] shrink-0">Tahap 1</span>
+                            <div>
+                                <h3 class="font-display font-bold text-base text-slate-900">Gelombang Audit &amp; Identitas Pengisi</h3>
+                                <p class="text-xs text-slate-500">Pilih gelombang aktif dan lengkapi identitas. Inti / Biro / Divisi wajib diisi meskipun Anonim.</p>
+                            </div>
                         </div>
+                        <span class="hidden sm:inline-flex items-center gap-1.5 text-[11px] text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg font-semibold shrink-0">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                            Auto-Draft Aktif
+                        </span>
                     </div>
 
-                    <!-- Pilihan Gelombang Audit -->
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5">
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">
                             Pilih Gelombang Audit <span class="text-rose-500">*</span>
                         </label>
-                        <div id="wave-cards-container" class="space-y-3">
-                            <!-- Di-render otomatis via JS -->
-                        </div>
+                        <div id="wave-cards-container" class="space-y-3"></div>
                     </div>
 
-                    <!-- Mode Identitas: Teridentifikasi vs Anonim -->
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-3">
                             Mode Identitas Pengisi
                         </label>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <label class="cursor-pointer">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                            <label class="cursor-pointer block">
                                 <input type="radio" name="privacyMode" value="identified" class="peer sr-only" checked>
-                                <div class="h-full p-3.5 rounded-xl border-2 border-slate-200 peer-checked:border-[#6A359C] peer-checked:bg-[#F3EBF9]/50 flex items-center gap-3 transition-all">
-                                    <div class="w-9 h-9 rounded-lg bg-[#F3EBF9] text-[#6A359C] flex items-center justify-center shrink-0">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                                <div class="choice-tile h-full p-4 rounded-xl border-2 border-slate-200 bg-white peer-checked:border-[#6A359C] peer-checked:bg-[#F3EBF9]/50 flex items-center gap-3.5">
+                                    <div class="w-10 h-10 rounded-xl bg-[#F3EBF9] text-[#6A359C] flex items-center justify-center shrink-0">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
                                     </div>
                                     <div>
                                         <div class="text-xs sm:text-sm font-bold text-slate-900">Teridentifikasi</div>
-                                        <div class="text-[11px] text-slate-500">Nama lengkap dan asal biro/divisi dicatat.</div>
+                                        <div class="text-[11px] text-slate-500 leading-snug mt-0.5">Nama lengkap dan asal biro/divisi dicatat.</div>
                                     </div>
                                 </div>
                             </label>
 
-                            <label class="cursor-pointer">
+                            <label class="cursor-pointer block">
                                 <input type="radio" name="privacyMode" value="anonymous" class="peer sr-only">
-                                <div class="h-full p-3.5 rounded-xl border-2 border-slate-200 peer-checked:border-[#F39237] peer-checked:bg-orange-100 flex items-center gap-3 transition-all">
-                                    <div class="w-9 h-9 rounded-lg bg-orange-100 text-[#F39237] flex items-center justify-center shrink-0">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/></svg>
+                                <div class="choice-tile h-full p-4 rounded-xl border-2 border-slate-200 bg-white peer-checked:border-[#F39237] peer-checked:bg-orange-100 flex items-center gap-3.5">
+                                    <div class="w-10 h-10 rounded-xl bg-orange-100 text-[#F39237] flex items-center justify-center shrink-0">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/></svg>
                                     </div>
                                     <div>
                                         <div class="text-xs sm:text-sm font-bold text-orange-950">Anonim</div>
-                                        <div class="text-[11px] text-slate-600">Nama dirahasiakan. Asal bidang wajib diisi khusus untuk pemetaan evaluasi oleh Biro Audit Internal.</div>
+                                        <div class="text-[11px] text-slate-600 leading-snug mt-0.5">Nama dirahasiakan. Asal bidang wajib diisi untuk pemetaan Biro Audit Internal.</div>
                                     </div>
                                 </div>
                             </label>
                         </div>
                     </div>
 
-                    <!-- Kolom Nama & Dropdown Inti / Biro / Divisi -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
-                            <label for="input-nama" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                            <label for="input-nama" class="block text-xs font-semibold text-slate-700 mb-2.5">
                                 Nama Lengkap Badan Pengurus <span id="nama-required-star" class="text-rose-500">*</span>
                             </label>
-                            <input type="text" id="input-nama" placeholder="Masukkan nama lengkap Anda"
-                                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm bg-white text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#6A359C] focus:border-[#6A359C] disabled:bg-orange-50 disabled:text-orange-800 disabled:border-orange-200 disabled:font-semibold transition-all">
+                            <input type="text" id="input-nama" placeholder="Contoh: Budi Santoso"
+                                class="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm bg-white text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#6A359C] focus:border-[#6A359C] disabled:bg-orange-50 disabled:text-orange-800 disabled:border-orange-200 disabled:font-semibold">
                         </div>
 
                         <div>
-                            <label for="select-divisi" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                            <label for="select-divisi" class="block text-xs font-semibold text-slate-700 mb-2.5">
                                 Inti / Biro / Divisi <span class="text-rose-500">*</span>
                             </label>
-                            <select id="select-divisi"
-                                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm bg-white text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#6A359C] focus:border-[#6A359C] transition-all">
-                                <option value="">-- Pilih Inti / Biro / Divisi --</option>
-                            </select>
+                            <input type="text" id="select-divisi" list="divisi-datalist" autocomplete="off"
+                                placeholder="Ketik huruf awal atau pilih Inti / Biro / Divisi..."
+                                class="w-full min-h-[44px] px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm bg-white text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#6A359C] focus:border-[#6A359C]">
+                            <datalist id="divisi-datalist"></datalist>
                         </div>
+                    </div>
+
+                    <div class="pt-7 mt-7 border-t border-slate-200/70 flex flex-col-reverse sm:flex-row items-center justify-between gap-3">
+                        <button type="button" id="btn-clear-form-step1"
+                            class="tactile-btn w-full sm:w-auto px-4 py-2.5 rounded-xl border border-rose-300 bg-rose-50 text-rose-700 text-xs sm:text-sm font-semibold hover:bg-rose-100 cursor-pointer">
+                            Hapus &amp; Bersihkan Isian
+                        </button>
+                        <button type="button" id="btn-next-step"
+                            class="tactile-btn w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#6A359C] hover:bg-[#4C2275] text-white font-display font-bold text-sm shadow-sm cursor-pointer">
+                            <span>Lanjut ke Pertanyaan Evaluasi</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Langkah 2: 3 Pertanyaan Dinamis Sesuai Gelombang Audit -->
-                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-6">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3.5">
-                        <div class="flex items-center gap-2.5">
-                            <span class="w-7 h-7 rounded-full bg-[#6A359C] text-white font-display font-bold text-xs flex items-center justify-center shrink-0">2</span>
+                <div id="form-step-2" class="hidden surface-card spotlight-card stagger-item rounded-2xl border border-[#B7C4B9]/75 p-5 sm:p-6 space-y-6">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200/70 pb-4">
+                        <div class="flex items-center gap-3">
+                            <span class="px-2.5 py-1 rounded-lg bg-[#6A359C] text-white font-display font-bold text-[11px] shrink-0">Tahap 2</span>
                             <div>
                                 <h3 id="form-wave-title" class="font-display font-bold text-base text-slate-900">
                                     Pertanyaan Evaluasi — Audit 1
@@ -370,13 +568,9 @@
                         </span>
                     </div>
 
-                    <!-- Container 3 Pertanyaan -->
-                    <div id="questions-container" class="space-y-6">
-                        <!-- Di-render otomatis via JS -->
-                    </div>
+                    <div id="questions-container" class="space-y-6"></div>
 
-                    <!-- Status Kunci & Tombol Kirim -->
-                    <div class="pt-4 border-t border-slate-200 space-y-4">
+                    <div class="pt-7 mt-7 border-t border-slate-200/80 space-y-5">
                         <div id="submit-warning-box" class="p-4 rounded-xl bg-amber-50 border border-amber-200 flex items-start gap-3">
                             <svg class="w-5 h-5 text-[#F39237] shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
                             <div class="text-xs text-amber-950 space-y-1">
@@ -388,12 +582,19 @@
                         </div>
 
                         <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
-                            <button type="button" id="btn-clear-form"
-                                class="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-slate-300 text-slate-600 text-xs sm:text-sm font-semibold hover:bg-slate-100 transition-all cursor-pointer">
-                                Bersihkan Isian
-                            </button>
+                            <div class="flex flex-col sm:flex-row items-center gap-2.5 w-full sm:w-auto">
+                                <button type="button" id="btn-prev-step"
+                                    class="tactile-btn w-full sm:w-auto flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-700 text-xs sm:text-sm font-semibold hover:bg-slate-100 cursor-pointer">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 17l-5-5m0 0l5-5m-5 5h12"/></svg>
+                                    <span>Kembali ke Tahap 1</span>
+                                </button>
+                                <button type="button" id="btn-clear-form"
+                                    class="tactile-btn w-full sm:w-auto px-4 py-2.5 rounded-xl border border-rose-300 bg-rose-50 text-rose-700 text-xs sm:text-sm font-semibold hover:bg-rose-100 cursor-pointer">
+                                    Hapus &amp; Bersihkan Isian
+                                </button>
+                            </div>
                             <button type="submit" id="btn-submit-audit" disabled
-                                class="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-display font-bold text-sm text-white bg-slate-300 cursor-not-allowed transition-all shadow-sm">
+                                class="tactile-btn w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-display font-bold text-sm text-white bg-slate-300 cursor-not-allowed shadow-sm">
                                 <svg id="icon-submit-lock" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
                                 <span id="text-submit-audit">Kirim Laporan Audit (Lengkapi Uraian)</span>
                             </button>
@@ -403,13 +604,10 @@
             </form>
         </section>
 
-        <!-- =============================================================== -->
-        <!-- TAB 2: REKAP AUDIT (PARTISIPASI PUBLIK)                         -->
-        <!-- =============================================================== -->
+        <!-- TAB 2: REKAP AUDIT -->
         <section id="section-admin" class="hidden space-y-6">
-
-            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-5">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+            <div class="surface-card spotlight-card stagger-item rounded-2xl border border-[#B7C4B9]/75 p-5 sm:p-6 space-y-5">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200/70 pb-5">
                     <div>
                         <span id="rekap-periode-badge" class="text-[11px] font-bold uppercase tracking-wider text-[#6A359C] bg-[#F3EBF9] px-2.5 py-1 rounded-md border border-purple-200">
                             Periode 2026
@@ -420,25 +618,28 @@
                         <p class="text-xs text-slate-500 mt-1">
                             Pantau jumlah partisipasi seluruh Inti, Biro, dan Divisi secara transparan.
                         </p>
-                        <div class="inline-flex items-center gap-1.5 mt-2 px-2.5 py-1 rounded-lg bg-[#E3EAE5] border border-[#B7C4B9] text-[11px] font-medium text-[#163829]">
+                        <div class="inline-flex items-center gap-1.5 mt-2.5 px-2.5 py-1 rounded-lg bg-[#E3EAE5] border border-[#B7C4B9] text-[11px] font-medium text-[#163829]">
                             <svg class="w-3.5 h-3.5 text-[#2D6A4F] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-                            <span>Isi uraian jawaban evaluasi dirahasiakan & hanya dapat diakses oleh Biro Audit Internal.</span>
+                            <span>Isi uraian jawaban evaluasi dirahasiakan &amp; hanya dapat diakses oleh Biro Audit Internal.</span>
                         </div>
                     </div>
                     <div class="flex flex-wrap items-center gap-2 self-start md:self-auto">
+                        <select id="public-filter-periode" aria-label="Filter Periode Rekap Publik"
+                            class="min-h-[44px] px-3 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-700 text-xs font-bold focus:outline-none focus:border-[#2D6A4F] cursor-pointer">
+                            <option value="ALL">Semua Periode</option>
+                        </select>
                         <select id="public-filter-wave" aria-label="Filter Gelombang Rekap Publik"
-                            class="px-3 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-700 text-xs font-bold focus:outline-none focus:border-[#2D6A4F] cursor-pointer">
+                            class="min-h-[44px] px-3 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-700 text-xs font-bold focus:outline-none focus:border-[#2D6A4F] cursor-pointer">
                             <option value="ALL">Semua Gelombang</option>
                         </select>
                         <button type="button" id="btn-refresh-public-stats"
-                            class="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold transition-all shadow-xs cursor-pointer">
+                            class="tactile-btn flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold cursor-pointer">
                             <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                             <span>Perbarui Data</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- Status Koneksi Google Sheets -->
                 <div class="px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
                     <div class="flex items-center gap-2">
                         <span id="sheets-status-dot" class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
@@ -447,88 +648,77 @@
                     <span id="sheets-last-sync-text" class="text-[11px] text-slate-500">Terakhir sinkronisasi: -</span>
                 </div>
 
-                <!-- Statistik Ringkas -->
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    <div class="p-3.5 rounded-xl bg-[#F3EBF9]/60 border border-purple-200/70">
+                    <div class="choice-tile p-3.5 rounded-xl bg-[#F3EBF9]/60 border border-purple-200/70">
                         <div class="text-[11px] font-semibold text-[#6A359C]">Total Laporan</div>
-                        <div id="stat-total" class="font-display text-2xl font-extrabold text-[#4C2275] mt-0.5">0</div>
+                        <div id="stat-total" class="font-display text-2xl font-extrabold text-[#4C2275] mt-0.5 tabular-nums">0</div>
                     </div>
-                    <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
+                    <div class="choice-tile p-3.5 rounded-xl bg-white border border-slate-200">
                         <div class="text-[11px] font-semibold text-slate-500">Teridentifikasi</div>
-                        <div id="stat-identified" class="font-display text-2xl font-extrabold text-slate-800 mt-0.5">0</div>
+                        <div id="stat-identified" class="font-display text-2xl font-extrabold text-slate-800 mt-0.5 tabular-nums">0</div>
                     </div>
-                    <div class="p-3.5 rounded-xl bg-orange-50/70 border border-orange-200/70">
+                    <div class="choice-tile p-3.5 rounded-xl bg-orange-50 border border-orange-200">
                         <div class="text-[11px] font-semibold text-orange-800">Mode Anonim</div>
-                        <div id="stat-anon" class="font-display text-2xl font-extrabold text-[#F39237] mt-0.5">0</div>
+                        <div id="stat-anon" class="font-display text-2xl font-extrabold text-[#F39237] mt-0.5 tabular-nums">0</div>
                     </div>
-                    <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
+                    <div class="choice-tile p-3.5 rounded-xl bg-white border border-slate-200">
                         <div class="text-[11px] font-semibold text-slate-500">Rata-rata Kedalaman</div>
-                        <div id="stat-avg-words" class="font-display text-2xl font-extrabold text-emerald-700 mt-0.5">0 <span class="text-xs font-normal text-slate-500">kata</span></div>
+                        <div id="stat-avg-words" class="font-display text-2xl font-extrabold text-emerald-700 mt-0.5 tabular-nums">0 <span class="text-xs font-normal text-slate-500">kata</span></div>
                     </div>
                 </div>
 
-                <!-- Kartu Partisipasi per Inti / Biro / Divisi -->
                 <div class="pt-1">
-                    <div class="flex flex-wrap items-center justify-between gap-1 mb-2.5">
+                    <div class="flex flex-wrap items-center justify-between gap-1 mb-3">
                         <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700">
                             Jumlah Pengisi per Inti / Biro / Divisi
                         </h3>
                         <span class="text-[11px] text-slate-400">Termasuk pengisi anonim dari tiap bidang</span>
                     </div>
-                    <div id="division-summary-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
-                        <!-- Di-render otomatis via JS -->
-                    </div>
+                    <div id="division-summary-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5"></div>
                 </div>
-
             </div>
         </section>
 
-        <!-- =============================================================== -->
-        <!-- TAB 3: PENGATURAN (DIPROTEKSI PASSWORD)                         -->
-        <!-- =============================================================== -->
+        <!-- TAB 3: PENGATURAN -->
         <section id="section-settings" class="hidden">
-
-            <!-- Layar Kunci Password -->
-            <div id="settings-lock-view" class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-10 max-w-md mx-auto text-center space-y-5">
+            <div id="settings-lock-view" class="surface-card spotlight-card tilt-card stagger-item rounded-2xl border border-[#B7C4B9]/75 p-6 sm:p-10 max-w-md mx-auto text-center space-y-6">
                 <div class="w-14 h-14 rounded-2xl bg-[#F3EBF9] text-[#6A359C] flex items-center justify-center mx-auto border border-purple-200">
                     <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
                 </div>
                 <div class="space-y-1.5">
                     <h2 class="font-display text-xl font-extrabold text-slate-900">Akses Khusus Biro Audit Internal</h2>
                     <p class="text-xs text-slate-500 leading-relaxed">
-                        Masukkan password untuk membuka pengaturan periode kepengurusan, gelombang audit, pertanyaan, dan integrasi Google Sheets.
+                        Masukkan password untuk membuka hasil evaluasi, pengaturan periode kepengurusan, kabinet, struktur divisi, gelombang audit, dan integrasi Google Sheets.
                     </p>
                 </div>
 
-                <form id="unlock-settings-form" class="space-y-3.5 text-left">
+                <form id="unlock-settings-form" class="space-y-5 text-left">
                     <div>
-                        <label for="input-unlock-password" class="block text-xs font-bold text-slate-700 mb-1.5">
+                        <label for="input-unlock-password" class="block text-xs font-bold text-slate-700 mb-2.5">
                             Password Pengaturan
                         </label>
                         <div class="relative">
                             <input type="password" id="input-unlock-password" placeholder="Masukkan password..."
-                                class="w-full pr-11 pl-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#6A359C] focus:border-[#6A359C]">
+                                class="w-full min-h-[44px] pr-11 pl-3.5 py-2.5 rounded-xl border border-slate-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#6A359C] focus:border-[#6A359C] disabled:bg-slate-100 disabled:text-slate-400">
                             <button type="button" id="btn-toggle-pass-visibility" aria-label="Lihat atau sembunyikan password"
-                                class="absolute inset-y-0 right-0 px-3 flex items-center text-slate-400 hover:text-slate-700 cursor-pointer">
+                                class="absolute inset-y-0 right-0 px-3.5 flex items-center text-slate-400 hover:text-slate-700 cursor-pointer">
                                 <svg id="icon-eye-show" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                                 <svg id="icon-eye-hide" class="w-4 h-4 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/></svg>
                             </button>
                         </div>
-                        <p id="unlock-error-msg" class="hidden text-xs text-rose-600 font-semibold mt-1.5">
+                        <p id="unlock-error-msg" class="hidden text-xs text-rose-600 font-semibold mt-2 tabular-nums">
                             Password salah. Silakan periksa kembali.
                         </p>
                     </div>
                     <button type="submit"
-                        class="w-full py-2.5 px-4 rounded-xl bg-[#6A359C] hover:bg-[#4C2275] text-white font-display font-bold text-sm shadow-sm transition-all cursor-pointer">
+                        class="tactile-btn w-full py-3 px-4 rounded-xl bg-[#6A359C] hover:bg-[#4C2275] text-white font-display font-bold text-sm shadow-sm cursor-pointer">
                         Buka Pengaturan
                     </button>
                 </form>
-
             </div>
 
-            <!-- Panel Pengaturan Terbuka -->
-            <div id="settings-unlocked-view" class="hidden bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-6">
-                <div class="border-b border-slate-100 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div id="settings-unlocked-view" class="hidden surface-card spotlight-card stagger-item rounded-2xl border border-[#B7C4B9]/75 p-5 sm:p-6 space-y-6">
+                <div class="border-b border-slate-200/70 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                         <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
                             Mode Admin Aktif
@@ -537,188 +727,231 @@
                             Pengaturan Portal Audit
                         </h2>
                         <p class="text-xs text-slate-500 mt-1">
-                            Sesuaikan periode tahun kepengurusan, gelombang audit, pertanyaan, dan koneksi Google Sheets.
+                            Kelola seluruh konfigurasi portal agar siap digunakan lintas periode kepengurusan (2026, 2027, dst.) tanpa mengubah kode.
                         </p>
                     </div>
                     <div class="flex flex-wrap items-center gap-2 shrink-0">
                         <button type="button" id="btn-lock-settings"
-                            class="px-3.5 py-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 text-xs font-bold transition-all cursor-pointer">
+                            class="tactile-btn px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 text-xs font-bold cursor-pointer">
                             Kunci Kembali
                         </button>
                         <button type="button" id="btn-save-settings"
-                            class="px-5 py-2.5 rounded-xl bg-[#6A359C] hover:bg-[#4C2275] text-white text-xs font-bold shadow-sm transition-all cursor-pointer">
+                            class="tactile-btn px-5 py-2.5 rounded-xl bg-[#6A359C] hover:bg-[#4C2275] text-white text-xs font-bold shadow-sm cursor-pointer">
                             Simpan Semua Pengaturan
                         </button>
                     </div>
                 </div>
 
-                <!-- ======================================================= -->
-                <!-- BAGIAN KHUSUS ADMIN: RINCIAN JAWABAN, FILTER & EKSPOR   -->
-                <!-- ======================================================= -->
+                <!-- BAGIAN 1: RINCIAN JAWABAN -->
                 <div class="p-4 sm:p-5 rounded-2xl bg-purple-50/40 border border-purple-200/80 space-y-5">
                     <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-purple-200/70 pb-4">
                         <div>
                             <h3 class="font-display font-bold text-base sm:text-lg text-slate-900">
-                                Hasil & Rincian Jawaban Audit
+                                Hasil &amp; Rincian Jawaban Audit
                             </h3>
                             <p class="text-xs text-slate-600">
-                                Kelola, filter, salin ringkasan, dan unduh seluruh laporan evaluasi masuk.
+                                Kelola, filter per periode/gelombang/bidang, salin ringkasan, hapus item, dan unduh CSV/Excel.
                             </p>
                         </div>
                         <div class="flex flex-wrap items-center gap-2 shrink-0">
                             <button type="button" id="btn-sync-sheets"
-                                class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold transition-all shadow-2xs cursor-pointer">
+                                class="tactile-btn flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold cursor-pointer">
                                 <svg id="icon-sync-spin" class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                                 <span>Sinkronisasi Sheets</span>
                             </button>
                             <button type="button" id="btn-copy-summary"
-                                class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-purple-200 bg-white hover:bg-purple-100 text-[#4C2275] text-xs font-bold transition-all shadow-2xs cursor-pointer">
+                                class="tactile-btn flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-purple-200 bg-white hover:bg-purple-100 text-[#4C2275] text-xs font-bold cursor-pointer">
                                 <svg class="w-4 h-4 text-[#6A359C] shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
                                 <span>Salin Ringkasan</span>
                             </button>
                             <button type="button" id="btn-export-csv"
-                                class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#6A359C] hover:bg-[#4C2275] text-white text-xs font-bold transition-all shadow-2xs cursor-pointer">
+                                class="tactile-btn flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#6A359C] hover:bg-[#4C2275] text-white text-xs font-bold cursor-pointer">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                                 <span>Unduh CSV / Excel</span>
+                            </button>
+                            <button type="button" id="btn-clear-local-data"
+                                class="tactile-btn flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-rose-300 bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-bold cursor-pointer">
+                                <span>Hapus Data Rekap Lokal</span>
                             </button>
                         </div>
                     </div>
 
-                    <!-- Filter Gelombang, Divisi & Pencarian -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
                         <div>
-                            <label for="filter-wave" class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Filter Gelombang Audit</label>
-                            <select id="filter-wave" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white focus:outline-none focus:border-[#6A359C]">
+                            <label for="filter-periode" class="block text-[11px] font-bold text-slate-600 uppercase mb-2">Filter Periode</label>
+                            <select id="filter-periode" class="w-full min-h-[42px] px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white focus:outline-none focus:border-[#6A359C]">
+                                <option value="ALL">Semua Periode</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="filter-wave" class="block text-[11px] font-bold text-slate-600 uppercase mb-2">Filter Gelombang Audit</label>
+                            <select id="filter-wave" class="w-full min-h-[42px] px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white focus:outline-none focus:border-[#6A359C]">
                                 <option value="ALL">Semua Gelombang Audit</option>
                             </select>
                         </div>
                         <div>
-                            <label for="filter-divisi" class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Filter Inti / Biro / Divisi</label>
-                            <select id="filter-divisi" class="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white focus:outline-none focus:border-[#6A359C]">
+                            <label for="filter-divisi" class="block text-[11px] font-bold text-slate-600 uppercase mb-2">Filter Inti / Biro / Divisi</label>
+                            <select id="filter-divisi" class="w-full min-h-[42px] px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white focus:outline-none focus:border-[#6A359C]">
                                 <option value="ALL">Semua Inti / Biro / Divisi</option>
                             </select>
                         </div>
                         <div>
-                            <label for="filter-keyword" class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Cari Kata Kunci</label>
-                            <input type="text" id="filter-keyword" placeholder="Cari nama, kendala, saran..."
-                                class="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs focus:outline-none focus:border-[#6A359C]">
+                            <label for="filter-keyword" class="block text-[11px] font-bold text-slate-600 uppercase mb-2">Cari Kata Kunci</label>
+                            <input type="text" id="filter-keyword" placeholder="Ketik ID, nama, kendala, saran..."
+                                class="w-full min-h-[42px] px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs focus:outline-none focus:border-[#6A359C]">
                         </div>
                     </div>
 
-                    <!-- Daftar Kartu Jawaban Audit (Hanya Tampil Setelah Unlock Password) -->
-                    <div id="submissions-list-container" class="space-y-4 max-h-[620px] overflow-y-auto pr-1">
-                        <!-- Di-render otomatis via JS -->
+                    <div id="submissions-list-container" class="space-y-4 max-h-[620px] overflow-y-auto pr-1"></div>
+                </div>
+
+                <!-- BAGIAN 2: IDENTITAS KABINET & PENGATURAN UMUM -->
+                <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
+                    <div>
+                        <h3 class="font-display font-bold text-sm sm:text-base text-slate-900">
+                            Identitas Periode, Kabinet &amp; Standar Evaluasi
+                        </h3>
+                        <p class="text-xs text-slate-500">Ubah nama kabinet, logo kabinet di footer, tahun periode, dan batas minimal jawaban saat pergantian kepengurusan.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div>
+                            <label for="cfg-periode" class="block text-xs font-bold text-slate-700 mb-2">Periode Kepengurusan</label>
+                            <input type="text" id="cfg-periode" placeholder="Contoh: Periode 2027"
+                                class="w-full min-h-[42px] px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-sm font-semibold focus:outline-none focus:border-[#6A359C]">
+                        </div>
+                        <div>
+                            <label for="cfg-cabinet-name" class="block text-xs font-bold text-slate-700 mb-2">Nama Kabinet (Footer)</label>
+                            <input type="text" id="cfg-cabinet-name" placeholder="Contoh: Kabinet Astravena"
+                                class="w-full min-h-[42px] px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-sm font-semibold focus:outline-none focus:border-[#6A359C]">
+                        </div>
+                        <div>
+                            <label for="cfg-cabinet-logo" class="block text-xs font-bold text-slate-700 mb-2">File / URL Logo Kabinet</label>
+                            <input type="text" id="cfg-cabinet-logo" placeholder="logo-kabinet.png atau https://..."
+                                class="w-full min-h-[42px] px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs font-mono focus:outline-none focus:border-[#6A359C]">
+                        </div>
+                        <div>
+                            <label for="cfg-password" class="block text-xs font-bold text-slate-700 mb-2">Password Pengaturan</label>
+                            <input type="text" id="cfg-password" placeholder="Contoh: audit2027"
+                                class="w-full min-h-[42px] px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-sm font-mono font-semibold focus:outline-none focus:border-[#6A359C]">
+                        </div>
+                        <div>
+                            <label for="cfg-min-chars" class="block text-xs font-bold text-slate-700 mb-2">Minimal Karakter</label>
+                            <input type="number" id="cfg-min-chars" min="10" max="3000" placeholder="300"
+                                class="w-full min-h-[42px] px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-sm font-semibold focus:outline-none focus:border-[#6A359C]">
+                        </div>
+                        <div>
+                            <label for="cfg-min-words" class="block text-xs font-bold text-slate-700 mb-2">Minimal Kata</label>
+                            <input type="number" id="cfg-min-words" min="3" max="500" placeholder="45"
+                                class="w-full min-h-[42px] px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-sm font-semibold focus:outline-none focus:border-[#6A359C]">
+                        </div>
                     </div>
                 </div>
 
-                <!-- Pengaturan Umum: Periode, Password, Min Karakter, Min Kata -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200/80">
-                    <div>
-                        <label for="cfg-periode" class="block text-xs font-bold text-slate-700 mb-1.5">Periode Kepengurusan</label>
-                        <input type="text" id="cfg-periode" placeholder="Periode 2026"
-                            class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-sm font-semibold focus:outline-none focus:border-[#6A359C]">
+                <!-- BAGIAN 3: STRUKTUR DIVISI -->
+                <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div>
+                            <h3 class="font-display font-bold text-sm sm:text-base text-slate-900">
+                                Struktur Inti / Biro / Divisi &amp; Target Anggota (<span id="cfg-div-total">10</span> Bidang)
+                            </h3>
+                            <p class="text-xs text-slate-500">Sesuaikan nama bidang dan jumlah target pengurus per bidang untuk perhitungan persentase partisipasi.</p>
+                        </div>
+                        <button type="button" id="btn-add-division"
+                            class="tactile-btn self-start sm:self-auto px-3.5 py-2 rounded-xl bg-[#6A359C] hover:bg-[#4C2275] text-white text-xs font-bold cursor-pointer">
+                            + Tambah Bidang / Divisi
+                        </button>
                     </div>
-                    <div>
-                        <label for="cfg-password" class="block text-xs font-bold text-slate-700 mb-1.5">Password Pengaturan</label>
-                        <input type="text" id="cfg-password" placeholder="audit2026"
-                            class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-sm font-mono font-semibold focus:outline-none focus:border-[#6A359C]">
-                    </div>
-                    <div>
-                        <label for="cfg-min-chars" class="block text-xs font-bold text-slate-700 mb-1.5">Minimal Karakter</label>
-                        <input type="number" id="cfg-min-chars" min="10" max="3000"
-                            class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-sm font-semibold focus:outline-none focus:border-[#6A359C]">
-                    </div>
-                    <div>
-                        <label for="cfg-min-words" class="block text-xs font-bold text-slate-700 mb-1.5">Minimal Kata</label>
-                        <input type="number" id="cfg-min-words" min="3" max="500"
-                            class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-sm font-semibold focus:outline-none focus:border-[#6A359C]">
-                    </div>
+
+                    <div id="cfg-divisions-list" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
                 </div>
 
-                <!-- Integrasi Google Sheets Real-Time -->
-                <div class="p-4 sm:p-5 rounded-2xl bg-emerald-50/60 border border-emerald-200 space-y-4">
+                <!-- BAGIAN 4: INTEGRASI GOOGLE SHEETS -->
+                <div class="p-4 sm:p-5 rounded-2xl bg-emerald-50/70 border border-emerald-200 space-y-4">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-emerald-200/80 pb-3">
                         <div>
                             <h3 class="font-display font-bold text-sm sm:text-base text-slate-900">
-                                Integrasi Google Sheets Real-Time
+                                Integrasi Google Sheets Real-Time &amp; Cloud Config
                             </h3>
                             <p class="text-xs text-slate-600">
-                                Hubungkan ke Google Apps Script agar seluruh laporan pengurus otomatis masuk ke satu Google Sheets Biro Audit.
+                                Hubungkan ke Google Apps Script agar seluruh laporan &amp; perubahan pengaturan otomatis tersinkron ke semua perangkat pengurus.
                             </p>
                         </div>
                         <button type="button" id="btn-open-gas-modal"
-                            class="self-start sm:self-auto px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 text-xs font-bold shadow-2xs transition-all cursor-pointer">
+                            class="tactile-btn self-start sm:self-auto px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 text-xs font-bold cursor-pointer">
                             Salin Kode Google Apps Script
                         </button>
                     </div>
 
-                    <div class="space-y-2">
-                        <label for="cfg-sheets-url" class="block text-xs font-bold text-slate-700">
+                    <div>
+                        <label for="cfg-sheets-url" class="block text-xs font-bold text-slate-700 mb-2">
                             URL Web App Google Apps Script <span class="font-normal text-slate-500">(berakhiran /exec)</span>
                         </label>
                         <input type="url" id="cfg-sheets-url" placeholder="https://script.google.com/macros/s/AKfycb.../exec"
-                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-xs font-mono focus:outline-none focus:border-emerald-600">
+                            class="w-full min-h-[42px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-xs font-mono focus:outline-none focus:border-emerald-600">
                     </div>
                 </div>
 
-                <!-- Kelola Gelombang Audit (Tambah / Hapus / Buka / Kunci / Kelola Pertanyaan Dinamis) -->
+                <!-- BAGIAN 5: KELOLA GELOMBANG & PERTANYAAN -->
                 <div class="space-y-4">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                         <div>
                             <h3 class="font-display font-bold text-base text-slate-900">
-                                Kelola Gelombang & Pertanyaan Audit (<span id="cfg-wave-total">4</span> Gelombang)
+                                Kelola Gelombang &amp; Pertanyaan Audit (<span id="cfg-wave-total">4</span> Gelombang)
                             </h3>
                             <p class="text-xs text-slate-500">Tambah/kurangi gelombang, ubah status Aktif/Terkunci, serta tambah, kurangi, atau edit pertanyaan di tiap gelombang.</p>
                         </div>
                         <button type="button" id="btn-add-wave"
-                            class="self-start sm:self-auto px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-xs transition-all cursor-pointer">
+                            class="tactile-btn self-start sm:self-auto px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold cursor-pointer">
                             + Tambah Gelombang Audit
                         </button>
                     </div>
 
-                    <div id="cfg-waves-list" class="space-y-5">
-                        <!-- Di-render otomatis via JS -->
-                    </div>
+                    <div id="cfg-waves-list" class="space-y-5"></div>
                 </div>
 
-                <!-- Reset Data Lokal -->
-                <div class="pt-4 border-t border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                    <div class="text-xs text-slate-500">
-                        <strong>Reset Data Lokal:</strong> Hapus cache data rekap lokal atau kembalikan pengaturan ke bawaan awal.
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <button type="button" id="btn-clear-local-data"
-                            class="px-3.5 py-2 rounded-xl border border-rose-300 text-rose-700 hover:bg-rose-50 text-xs font-semibold transition-all cursor-pointer">
-                            Hapus Data Rekap Lokal
-                        </button>
-                        <button type="button" id="btn-reset-default-cfg"
-                            class="px-3.5 py-2 rounded-xl border border-slate-300 text-slate-600 hover:bg-slate-100 text-xs font-semibold transition-all cursor-pointer">
-                            Reset Pengaturan Default
-                        </button>
-                    </div>
+                <div class="pt-2 flex justify-end">
+                    <button type="button" id="btn-reset-default-cfg"
+                        class="tactile-btn px-3.5 py-2 rounded-xl border border-rose-300 bg-rose-50 text-rose-700 hover:bg-rose-100 text-xs font-bold cursor-pointer">
+                        Reset Pengaturan Default
+                    </button>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t border-slate-200 mt-12 py-6">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
-            <div class="font-semibold text-slate-700">
-                Himpunan Mahasiswa Gizi KM FKM UNAND
-            </div>
-            <div>
-                Biro Audit Internal • Kabinet Astravena
+    <!-- FOOTER -->
+    <footer class="mt-8 pb-6 stagger-item stagger-delay-3">
+        <div class="max-w-7xl w-full mx-auto px-4 sm:px-6">
+            <div class="footer-capsule rounded-2xl sm:rounded-full text-white flex flex-col sm:flex-row items-center justify-between gap-2.5">
+                <div class="flex items-center gap-2.5 min-w-0">
+                    <div id="footer-logo-ring" class="w-10 h-10 rounded-full bg-white p-0.5 shadow-sm border-2 border-[#EBCB38] flex items-center justify-center shrink-0 overflow-hidden">
+                        <img id="footer-cabinet-logo-img" src="logo-kabinet.png" alt="Logo Kabinet" width="40" height="40" loading="lazy" class="w-full h-full object-contain">
+                    </div>
+                    <div class="min-w-0 text-left">
+                        <div id="footer-cabinet-name-text" class="font-display font-extrabold text-base sm:text-lg tracking-tight text-white leading-none">
+                            Kabinet Astravena
+                        </div>
+                        <div class="text-[11px] text-[#F0F5F2] font-medium mt-1 flex flex-wrap items-center gap-1.5">
+                            <span>Himpunan Mahasiswa Gizi KM FKM UNAND</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2 shrink-0">
+                    <span class="min-h-[34px] inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#0b1f16]/70 border border-[#b7c4b9]/25 text-xs font-bold text-[#EBCB38]">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#EBCB38]"></span>
+                        <span>Biro Audit Internal</span>
+                    </span>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- =================================================================== -->
-    <!-- MODAL NOTIFIKASI UMUM                                               -->
-    <!-- =================================================================== -->
-    <div id="app-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 backdrop-blur-xs p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 space-y-4">
+    <!-- MODAL NOTIFIKASI -->
+    <div id="app-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-[#B7C4B9]/70 space-y-4 stagger-item">
             <div class="flex items-center gap-3">
                 <div id="modal-badge" class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 font-bold text-base">
                     ✓
@@ -729,40 +962,39 @@
                 </div>
             </div>
             <p id="modal-message" class="text-xs sm:text-sm text-slate-600 leading-relaxed"></p>
-            <div id="modal-footer" class="flex items-center justify-end gap-2 pt-2"></div>
+            <div id="modal-extra-body"></div>
+            <div id="modal-footer" class="flex flex-wrap items-center justify-end gap-2 pt-2"></div>
         </div>
     </div>
 
-    <!-- =================================================================== -->
-    <!-- MODAL KODE GOOGLE APPS SCRIPT                                       -->
-    <!-- =================================================================== -->
-    <div id="gas-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/65 backdrop-blur-xs p-4 overflow-y-auto">
-        <div class="bg-white rounded-2xl max-w-2xl w-full p-5 sm:p-6 shadow-2xl border border-slate-200 space-y-4 my-auto">
+    <!-- MODAL KODE GOOGLE APPS SCRIPT -->
+    <div id="gas-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/65 p-4 overflow-y-auto">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-5 sm:p-6 shadow-xl border border-[#B7C4B9]/70 space-y-4 my-auto stagger-item">
             <div class="flex items-start justify-between gap-3 border-b border-slate-100 pb-3.5">
                 <div>
-                    <h3 class="font-display font-bold text-base sm:text-lg text-slate-900">Kode Google Apps Script Siap Pakai</h3>
+                    <h3 class="font-display font-bold text-base sm:text-lg text-slate-900">Kode Google Apps Script Siap Pakai (v2.1 Cloud Sync)</h3>
                     <p class="text-xs text-slate-500">Tempelkan ke Ekstensi &rarr; Apps Script di Google Sheets Biro Audit Internal</p>
                 </div>
-                <button type="button" id="btn-close-gas-top" class="px-2.5 py-1 rounded-lg text-slate-500 hover:bg-slate-100 text-sm font-bold cursor-pointer">
+                <button type="button" id="btn-close-gas-top" aria-label="Tutup jendela kode script" class="px-2.5 py-1 rounded-lg text-slate-500 hover:bg-slate-100 text-sm font-bold cursor-pointer">
                     ✕
                 </button>
             </div>
 
-            <div class="p-3.5 rounded-xl bg-purple-50/80 border border-purple-200 text-xs text-slate-700 space-y-1">
-                <p class="font-bold text-[#4C2275]">Langkah Singkat Pemasangan:</p>
+            <div class="p-3.5 rounded-xl bg-purple-50 border border-purple-200 text-xs text-slate-700 space-y-1">
+                <p class="font-bold text-[#4C2275]">Langkah Singkat Pemasangan / Pembaruan:</p>
                 <ol class="list-decimal list-inside space-y-1">
-                    <li>Buka <strong>Google Sheets</strong> baru &rarr; klik menu <strong>Ekstensi &rarr; Apps Script</strong>.</li>
-                    <li>Hapus kode lama, tempel kode di bawah, lalu klik <strong>Terapkan &rarr; Deployment baru</strong>.</li>
-                    <li>Pilih jenis <strong>Aplikasi Web</strong>, atur <em>Jalankan sebagai</em>: <strong>Saya (Me)</strong>, dan <em>Yang memiliki akses</em>: <strong>Siapa saja (Anyone)</strong>.</li>
-                    <li>Salin URL Web App (berakhiran <code>/exec</code>) lalu tempel ke kolom di tab Pengaturan.</li>
+                    <li>Buka <strong>Google Sheets</strong> &rarr; klik menu <strong>Ekstensi &rarr; Apps Script</strong>.</li>
+                    <li>Ganti seluruh kode lama dengan kode di bawah, lalu klik <strong>Terapkan &rarr; Kelola deployment &rarr; Edit (ikon pensil) &rarr; Versi baru &rarr; Terapkan</strong>.</li>
+                    <li>Pastikan <em>Jalankan sebagai</em>: <strong>Saya (Me)</strong> dan <em>Yang memiliki akses</em>: <strong>Siapa saja (Anyone)</strong>.</li>
+                    <li>Salin URL Web App (<code>/exec</code>) lalu tempel ke kolom di tab Pengaturan.</li>
                 </ol>
             </div>
 
             <div>
                 <div class="flex items-center justify-between bg-slate-800 text-slate-200 px-3.5 py-2 rounded-t-xl text-[11px] font-mono">
-                    <span>Code.gs</span>
+                    <span>Code.gs (Laporan + Cloud Config + Hapus Satuan)</span>
                     <button type="button" id="btn-copy-gas-code"
-                        class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-sans font-bold text-[11px] transition-all cursor-pointer">
+                        class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-sans font-bold text-[11px] cursor-pointer">
                         Salin Kode
                     </button>
                 </div>
@@ -770,19 +1002,46 @@
   var lock = LockService.getScriptLock();
   lock.tryLock(10000);
   try {
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var raw = e.postData ? e.postData.contents : "{}";
+    var data = JSON.parse(raw);
+
+    if (data.action === "saveConfig" &amp;&amp; data.config) {
+      var cfgSheet = ss.getSheetByName("Portal_Config");
+      if (!cfgSheet) {
+        cfgSheet = ss.insertSheet("Portal_Config");
+      }
+      cfgSheet.clear();
+      cfgSheet.getRange("A1:B1").setValues([["Updated_At", "Config_JSON"]]).setFontWeight("bold");
+      cfgSheet.getRange("A2:B2").setValues([[new Date().toLocaleString("id-ID"), JSON.stringify(data.config)]]);
+      return ContentService.createTextOutput(JSON.stringify({ status: "success", action: "saveConfig" }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    if (data.action === "deleteEntry" &amp;&amp; data.id) {
+      var mainSheet = ss.getSheets()[0];
+      var rows = mainSheet.getDataRange().getValues();
+      for (var r = rows.length - 1; r &gt;= 1; r--) {
+        if (String(rows[r][0]).trim() === String(data.id).trim()) {
+          mainSheet.deleteRow(r + 1);
+          break;
+        }
+      }
+      return ContentService.createTextOutput(JSON.stringify({ status: "success", action: "deleteEntry", id: data.id }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    var sheet = ss.getSheets()[0];
     var headers = [
-      "ID", "Hari & Tanggal", "Periode", "Gelombang Audit",
+      "ID", "Hari &amp; Tanggal", "Periode", "Gelombang Audit",
       "Mode Identitas", "Nama Pengisi", "Inti / Biro / Divisi",
-      "Jumlah Pertanyaan", "Rincian Pertanyaan & Jawaban",
+      "Jumlah Pertanyaan", "Rincian Pertanyaan &amp; Jawaban",
       "Total Karakter", "Total Kata", "JSON_RAW"
     ];
     if (sheet.getLastRow() === 0) {
       sheet.appendRow(headers);
-      sheet.getRange(1, 1, 1, headers.length).setFontWeight("bold").setBackground("#F3EBF9");
+      sheet.getRange(1, 1, 1, headers.length).setFontWeight("bold").setBackground("#D2E3D8");
     }
-    var raw = e.postData ? e.postData.contents : "{}";
-    var data = JSON.parse(raw);
     var answers = data.answers || [];
     var formattedQA = answers.map(function(item, idx) {
       return "[" + (idx + 1) + "] " + item.question + "\nJawaban: " + item.answer;
@@ -813,88 +1072,98 @@
 }
 
 function doGet(e) {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheets()[0];
   var values = sheet.getDataRange().getValues();
   var results = [];
-  for (var i = 1; i < values.length; i++) {
+  for (var i = 1; i &lt; values.length; i++) {
     var r = values[i];
-    if (!r[0] && !r[6]) continue;
+    var hasAnyValue = r.some(function(cell) {
+      return String(cell || "").trim() !== "";
+    });
+    if (!hasAnyValue) continue;
+    var idVal = String(r[0] || "").trim();
+    var divVal = String(r[6] || "").trim();
+    if (!idVal || !divVal) continue;
+
     var parsedAnswers = [];
     try {
       if (r[11]) parsedAnswers = JSON.parse(r[11]);
     } catch (err) {}
     if (!Array.isArray(parsedAnswers) || parsedAnswers.length === 0) {
-      parsedAnswers = [{ question: "Rincian Audit", answer: String(r[8] || "") }];
+      var fallbackAns = String(r[8] || "").trim();
+      if (!fallbackAns) continue;
+      parsedAnswers = [{ question: "Rincian Audit", answer: fallbackAns }];
     }
     results.push({
-      id: String(r[0] || "AUD-" + i),
+      id: idVal,
       timestamp: String(r[1] || ""),
       periodeName: String(r[2] || ""),
       waveTitle: String(r[3] || "Audit 1"),
       isAnonymous: String(r[4]) === "Anonim",
       nama: String(r[5] || "Anonim"),
-      divisi: String(r[6] || ""),
+      divisi: divVal,
       answers: parsedAnswers
     });
   }
-  return ContentService.createTextOutput(JSON.stringify({ status: "success", data: results.reverse() }))
-    .setMimeType(ContentService.MimeType.JSON);
+
+  var savedConfig = null;
+  var cfgSheet = ss.getSheetByName("Portal_Config");
+  if (cfgSheet &amp;&amp; cfgSheet.getLastRow() &gt;= 2) {
+    try {
+      var rawCfg = cfgSheet.getRange("B2").getValue();
+      if (rawCfg) savedConfig = JSON.parse(rawCfg);
+    } catch (err) {}
+  }
+
+  return ContentService.createTextOutput(JSON.stringify({
+    status: "success",
+    data: results.reverse(),
+    config: savedConfig
+  })).setMimeType(ContentService.MimeType.JSON);
 }</pre>
             </div>
 
             <div class="flex justify-end">
-                <button type="button" id="btn-close-gas-bottom" class="px-5 py-2 rounded-xl bg-[#6A359C] hover:bg-[#4C2275] text-white text-xs font-bold transition-all cursor-pointer">
-                    Tutup
+                <button type="button" id="btn-close-gas-bottom" class="tactile-btn px-5 py-2 rounded-xl bg-[#6A359C] hover:bg-[#4C2275] text-white text-xs font-bold cursor-pointer">
+                    Tutup Jendela
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- =================================================================== -->
-    <!-- JAVASCRIPT BERSIH & TERSTRUKTUR                                     -->
-    <!-- =================================================================== -->
     <script>
     (function() {
         'use strict';
 
-        // 1. URUTAN RESMI INTI -> BIRO (ABJAD) -> DIVISI (ABJAD)
-        const DIVISIONS_LIST = [
-            "Inti",
-            "Biro Audit Internal",
-            "Biro Dana Usaha dan Keuangan",
-            "Biro Kesekretariatan",
-            "Divisi Akademis dan Keprofesian Gizi",
-            "Divisi Hubungan Luar",
-            "Divisi Informasi dan Komunikasi",
-            "Divisi Kajian Strategis",
-            "Divisi Pengembangan Sumber Daya Mahasiswa",
-            "Divisi Pengabdian Masyarakat"
-        ];
-
-        const DIVISION_TARGETS = {
-            "Inti": 3,
-            "Biro Audit Internal": 4,
-            "Biro Dana Usaha dan Keuangan": 4,
-            "Biro Kesekretariatan": 3,
-            "Divisi Akademis dan Keprofesian Gizi": 2,
-            "Divisi Hubungan Luar": 2,
-            "Divisi Informasi dan Komunikasi": 4,
-            "Divisi Kajian Strategis": 4,
-            "Divisi Pengembangan Sumber Daya Mahasiswa": 4,
-            "Divisi Pengabdian Masyarakat": 4
-        };
-
-        const STORAGE_CONFIG_KEY = "hima_gizi_audit_cfg_v5";
+        const STORAGE_CONFIG_KEY = "hima_gizi_audit_cfg_v6";
         const STORAGE_DATA_KEY   = "hima_gizi_audit_data_v3";
+        const LOGIN_LOCK_STORAGE_KEY = "hima_gizi_audit_login_lock_v1";
 
-        const EMBEDDED_SHEETS_URL = "https://script.google.com/macros/s/AKfycbxFH0zuooe9oibLxk1voIRT-TcnVbwr3IGGvstRqdbYKmBDOY67XpJq5SbcRVAe1mnv/exec";
+        const EMBEDDED_SHEETS_URL = "https://script.google.com/macros/s/AKfycbxfNIMu2yBGz67_DY8pTJokJRReM9PYK7IzOfmKVTa6TBaNHgHwFvtG0dtFmD01W6Wm/exec";
+
+        const DEFAULT_DIVISIONS = [
+            { name: "Inti", target: 3 },
+            { name: "Biro Audit Internal", target: 4 },
+            { name: "Biro Dana Usaha dan Keuangan", target: 4 },
+            { name: "Biro Kesekretariatan", target: 3 },
+            { name: "Divisi Akademis dan Keprofesian Gizi", target: 2 },
+            { name: "Divisi Hubungan Luar", target: 2 },
+            { name: "Divisi Informasi dan Komunikasi", target: 4 },
+            { name: "Divisi Kajian Strategis", target: 4 },
+            { name: "Divisi Pengembangan Sumber Daya Mahasiswa", target: 4 },
+            { name: "Divisi Pengabdian Masyarakat", target: 4 }
+        ];
 
         const DEFAULT_CONFIG = {
             periodeName: "Periode 2026",
+            cabinetName: "Kabinet Astravena",
+            cabinetLogo: "logo-kabinet.png",
             adminPassword: "audit2026",
             sheetsWebAppUrl: EMBEDDED_SHEETS_URL,
             minChars: 300,
             minWords: 45,
+            divisions: JSON.parse(JSON.stringify(DEFAULT_DIVISIONS)),
             waves: [
                 {
                     num: 1,
@@ -979,35 +1248,142 @@ function doGet(e) {
             ]
         };
 
-        // State Aplikasi
         let config = loadConfig();
         let submissions = loadSubmissions();
         let selectedWaveIdx = findFirstOpenWaveIndex();
         let isSettingsUnlocked = false;
+        let isEditingSettings = false;
         let fieldValidState = [false, false, false];
+        let currentFormStep = 1;
+        let skipAutoSyncUntilManual = false;
 
-        // -----------------------------------------------------------------
-        // FUNGSI UTILITAS, PENYIMPANAN, NAVIGASI & SINKRONISASI SHEETS
-        // -----------------------------------------------------------------
+        function getDivisions() {
+            if (Array.isArray(config.divisions) && config.divisions.length > 0) {
+                return config.divisions;
+            }
+            return DEFAULT_DIVISIONS;
+        }
+
+        function buildCloudConfigPayload() {
+            const { adminPassword, ...safeConfig } = config;
+            return safeConfig;
+        }
+
+        function initInteractiveMotion() {
+            const isFinePointer = window.matchMedia && window.matchMedia("(pointer: fine)").matches;
+            const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            if (!isFinePointer || prefersReduced) return;
+
+            document.querySelectorAll(".spotlight-card").forEach(card => {
+                let rafId = null;
+                card.addEventListener("pointermove", (e) => {
+                    if (rafId) cancelAnimationFrame(rafId);
+                    rafId = requestAnimationFrame(() => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        card.style.setProperty("--mouse-x", `${x}px`);
+                        card.style.setProperty("--mouse-y", `${y}px`);
+
+                        if (card.classList.contains("tilt-card")) {
+                            const normX = (x / rect.width) - 0.5;
+                            const normY = (y / rect.height) - 0.5;
+                            const rotateX = (-normY * 2.2).toFixed(2);
+                            const rotateY = (normX * 2.2).toFixed(2);
+                            card.style.transform = `perspective(1100px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-1px)`;
+                        }
+                    });
+                }, { passive: true });
+
+                card.addEventListener("pointerleave", () => {
+                    if (rafId) cancelAnimationFrame(rafId);
+                    if (card.classList.contains("tilt-card")) {
+                        card.style.transform = "";
+                    }
+                });
+            });
+        }
+
+        function triggerTopProgress(active) {
+            const topBar = document.getElementById("top-loading-bar");
+            if (!topBar) return;
+            if (active) {
+                topBar.style.opacity = "1";
+                topBar.style.width = "72%";
+            } else {
+                topBar.style.width = "100%";
+                setTimeout(() => {
+                    topBar.style.opacity = "0";
+                    setTimeout(() => { topBar.style.width = "0%"; }, 220);
+                }, 220);
+            }
+        }
+
+        function normalizeDivisionInput(rawVal) {
+            const cleaned = String(rawVal || "").trim().replace(/\s+/g, " ").toLowerCase();
+            if (!cleaned) return "";
+            const match = getDivisions().find(d => d.name.toLowerCase() === cleaned);
+            return match ? match.name : "";
+        }
+
+        async function copyTextModern(text, onSuccess) {
+            try {
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(text);
+                    if (onSuccess) onSuccess();
+                    return;
+                }
+            } catch (e) {}
+
+            const ta = document.createElement("textarea");
+            ta.value = text;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            try {
+                document.execCommand("copy");
+                if (onSuccess) onSuccess();
+            } catch (err) {
+                console.error(err);
+            }
+            document.body.removeChild(ta);
+        }
+
         function loadConfig() {
             try {
                 const raw = localStorage.getItem(STORAGE_CONFIG_KEY);
                 if (raw) {
                     const parsed = JSON.parse(raw);
-                    return Object.assign({}, DEFAULT_CONFIG, parsed);
+                    const merged = Object.assign({}, DEFAULT_CONFIG, parsed);
+                    if (!merged.adminPassword) merged.adminPassword = DEFAULT_CONFIG.adminPassword;
+                    if (!Array.isArray(merged.divisions) || merged.divisions.length === 0) {
+                        merged.divisions = JSON.parse(JSON.stringify(DEFAULT_DIVISIONS));
+                    }
+                    if (!Array.isArray(merged.waves) || merged.waves.length === 0) {
+                        merged.waves = JSON.parse(JSON.stringify(DEFAULT_CONFIG.waves));
+                    }
+                    return merged;
                 }
-            } catch (e) {
-                console.error("Gagal memuat config:", e);
-            }
+            } catch (e) {}
             return JSON.parse(JSON.stringify(DEFAULT_CONFIG));
         }
 
         function saveConfig() {
             try {
                 localStorage.setItem(STORAGE_CONFIG_KEY, JSON.stringify(config));
-            } catch (e) {
-                console.error("Gagal menyimpan config:", e);
-            }
+            } catch (e) {}
+        }
+
+        function sanitizeSubmissions(list) {
+            if (!Array.isArray(list)) return [];
+            return list.filter(item => {
+                if (!item || typeof item !== "object") return false;
+                const hasId = String(item.id || "").trim() !== "";
+                const hasDiv = String(item.divisi || "").trim() !== "";
+                const hasAns = Array.isArray(item.answers) && item.answers.some(a => String(a && a.answer || "").trim() !== "");
+                return hasId && hasDiv && hasAns;
+            });
         }
 
         function loadSubmissions() {
@@ -1015,20 +1391,16 @@ function doGet(e) {
                 const raw = localStorage.getItem(STORAGE_DATA_KEY);
                 if (raw) {
                     const parsed = JSON.parse(raw);
-                    if (Array.isArray(parsed)) return parsed;
+                    return sanitizeSubmissions(parsed);
                 }
-            } catch (e) {
-                console.error("Gagal memuat submissions:", e);
-            }
+            } catch (e) {}
             return [];
         }
 
         function saveSubmissions() {
             try {
                 localStorage.setItem(STORAGE_DATA_KEY, JSON.stringify(submissions));
-            } catch (e) {
-                console.error("Gagal menyimpan submissions:", e);
-            }
+            } catch (e) {}
         }
 
         function findFirstOpenWaveIndex() {
@@ -1051,7 +1423,7 @@ function doGet(e) {
             return cleaned.split(/\s+/).length;
         }
 
-function formatIndoDateTime(dateObj) {
+        function formatIndoDateTime(dateObj) {
             const days = ["Ahad", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
             const months = [
                 "Januari", "Februari", "Maret", "April", "Mei", "Juni",
@@ -1081,13 +1453,40 @@ function formatIndoDateTime(dateObj) {
             const minCharsEl = document.getElementById("info-min-chars");
             const minWordsEl = document.getElementById("info-min-words");
             const badgeMin = document.getElementById("form-min-badge");
+            const footerCabName = document.getElementById("footer-cabinet-name-text");
+            const footerCabLogo = document.getElementById("footer-cabinet-logo-img");
 
             if (headerPeriode) headerPeriode.textContent = config.periodeName;
             if (rekapPeriode) rekapPeriode.textContent = config.periodeName;
             if (minCharsEl) minCharsEl.textContent = config.minChars;
             if (minWordsEl) minWordsEl.textContent = config.minWords;
             if (badgeMin) badgeMin.textContent = `Min. ${config.minChars} karakter dan ${config.minWords} kata`;
-            
+            if (footerCabName) footerCabName.textContent = config.cabinetName || "Kabinet Astravena";
+            if (footerCabLogo) {
+                footerCabLogo.src = (config.cabinetLogo || "").trim() || "logo-kabinet.png";
+                footerCabLogo.alt = `Logo ${config.cabinetName || "Kabinet"}`;
+            }
+
+            const periodesSet = new Set([config.periodeName]);
+            submissions.forEach(s => { if (s.periodeName) periodesSet.add(s.periodeName); });
+            const periodesArr = Array.from(periodesSet);
+
+            const publicFilterPeriode = document.getElementById("public-filter-periode");
+            if (publicFilterPeriode) {
+                const prevPubP = publicFilterPeriode.value;
+                publicFilterPeriode.innerHTML = `<option value="ALL">Semua Periode</option>` +
+                    periodesArr.map(p => `<option value="${escapeHTML(p)}">${escapeHTML(p)}</option>`).join("");
+                publicFilterPeriode.value = periodesArr.includes(prevPubP) ? prevPubP : config.periodeName;
+            }
+
+            const filterPeriode = document.getElementById("filter-periode");
+            if (filterPeriode) {
+                const prevAdmP = filterPeriode.value;
+                filterPeriode.innerHTML = `<option value="ALL">Semua Periode</option>` +
+                    periodesArr.map(p => `<option value="${escapeHTML(p)}">${escapeHTML(p)}</option>`).join("");
+                filterPeriode.value = prevAdmP || "ALL";
+            }
+
             const filterWave = document.getElementById("filter-wave");
             if (filterWave) {
                 const prev = filterWave.value;
@@ -1107,15 +1506,18 @@ function formatIndoDateTime(dateObj) {
         }
 
         function populateDivisionSelects() {
-            const formSelect = document.getElementById("select-divisi");
+            const formDatalist = document.getElementById("divisi-datalist");
             const filterSelect = document.getElementById("filter-divisi");
-            const optionsHTML = DIVISIONS_LIST.map(d => `<option value="${escapeHTML(d)}">${escapeHTML(d)}</option>`).join("");
+            const divs = getDivisions();
+            const optionsHTML = divs.map(d => `<option value="${escapeHTML(d.name)}">${escapeHTML(d.name)}</option>`).join("");
 
-            if (formSelect) {
-                formSelect.innerHTML = `<option value="">-- Pilih Inti / Biro / Divisi --</option>` + optionsHTML;
+            if (formDatalist) {
+                formDatalist.innerHTML = optionsHTML;
             }
             if (filterSelect) {
+                const prev = filterSelect.value;
                 filterSelect.innerHTML = `<option value="ALL">Semua Inti / Biro / Divisi</option>` + optionsHTML;
+                if (prev) filterSelect.value = prev;
             }
         }
 
@@ -1129,13 +1531,13 @@ function formatIndoDateTime(dateObj) {
             container.className = "space-y-3";
 
             const gridColsClass = openWaves.length === 1 ? "grid-cols-1" : "grid-cols-1 sm:grid-cols-2";
-    const openHTML = openWaves.length > 0 ? `
-        <div class="grid ${gridColsClass} gap-3">
+            const openHTML = openWaves.length > 0 ? `
+                <div class="grid ${gridColsClass} gap-3">
                     ${openWaves.map(({ w: wave, idx }) => {
                         const isSelected = idx === selectedWaveIdx;
                         return `
                             <button type="button" data-wave-idx="${idx}"
-                                class="wave-select-btn p-4 rounded-xl border-2 ${isSelected ? "border-[#2D6A4F] bg-[#E3EAE5] shadow-xs" : "border-slate-200 bg-white hover:border-[#749682]"} text-left cursor-pointer transition-all flex items-center justify-between gap-3">
+                                class="wave-select-btn choice-tile p-4 rounded-xl border-2 ${isSelected ? "border-[#2D6A4F] bg-[#E3EAE5]" : "border-slate-200 bg-white hover:border-[#749682]"} text-left cursor-pointer flex items-center justify-between gap-3">
                                 <div>
                                     <div class="font-display font-extrabold text-sm ${isSelected ? "text-[#163829]" : "text-slate-800"}">${escapeHTML(wave.title)}</div>
                                     <div class="text-[11px] ${isSelected ? "text-[#1B4332] font-semibold" : "text-slate-500"} mt-0.5">
@@ -1163,7 +1565,28 @@ function formatIndoDateTime(dateObj) {
             container.innerHTML = openHTML + lockedHTML;
         }
 
+        function setFormStep(stepNumber) {
+            currentFormStep = stepNumber;
+            const step1El = document.getElementById("form-step-1");
+            const step2El = document.getElementById("form-step-2");
+            const badgeEl = document.getElementById("step-indicator-badge");
+
+            if (stepNumber === 1) {
+                step1El.classList.remove("hidden");
+                step2El.classList.add("hidden");
+                if (badgeEl) badgeEl.textContent = "Langkah 1 dari 2 • Identitas";
+            } else {
+                step1El.classList.add("hidden");
+                step2El.classList.remove("hidden");
+                if (badgeEl) badgeEl.textContent = "Langkah 2 dari 2 • Uraian Evaluasi";
+            }
+        }
+
         function switchTab(tabName) {
+            if (tabName !== "settings") {
+                isEditingSettings = false;
+            }
+
             const sections = {
                 form: document.getElementById("section-form"),
                 admin: document.getElementById("section-admin"),
@@ -1182,22 +1605,25 @@ function formatIndoDateTime(dateObj) {
             document.querySelectorAll(".nav-tab-btn").forEach(btn => {
                 const isActive = btn.getAttribute("data-tab") === tabName;
                 if (isActive) {
-                    btn.className = "nav-tab-btn flex-1 md:flex-initial flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-lg text-xs font-bold transition-all bg-white text-[#4C2275] shadow-sm cursor-pointer";
+                    btn.className = "nav-tab-btn min-h-[34px] flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-bold bg-white text-[#163829] shadow-sm cursor-pointer";
                 } else {
-                    btn.className = "nav-tab-btn flex-1 md:flex-initial flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-lg text-xs font-bold transition-all text-purple-100 hover:text-white cursor-pointer";
+                    btn.className = "nav-tab-btn min-h-[34px] flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-bold text-purple-100 hover:text-white cursor-pointer";
                 }
             });
 
-            if (tabName === "admin") renderAdminDashboard();
+            if (tabName === "admin") {
+                renderAdminDashboard();
+            }
             if (tabName === "settings") renderSettingsView();
         }
 
-        function showModal({ type = "success", title = "Notifikasi", subtitle = "Himpunan Mahasiswa Gizi KM FKM UNAND", message = "", footerHtml = null }) {
+        function showModal({ type = "success", title = "Notifikasi", subtitle = "Himpunan Mahasiswa Gizi KM FKM UNAND", message = "", extraHtml = "", footerHtml = null }) {
             const modal = document.getElementById("app-modal");
             const badge = document.getElementById("modal-badge");
             const titleEl = document.getElementById("modal-title");
             const subEl = document.getElementById("modal-subtitle");
             const msgEl = document.getElementById("modal-message");
+            const extraEl = document.getElementById("modal-extra-body");
             const footerEl = document.getElementById("modal-footer");
 
             if (type === "warning" || type === "error") {
@@ -1211,13 +1637,14 @@ function formatIndoDateTime(dateObj) {
             titleEl.textContent = title;
             subEl.textContent = subtitle;
             msgEl.textContent = message;
+            extraEl.innerHTML = extraHtml || "";
 
             if (footerHtml) {
                 footerEl.innerHTML = footerHtml;
             } else {
                 footerEl.innerHTML = `
-                    <button type="button" id="btn-close-modal-dyn" class="px-4 py-2 rounded-xl bg-[#6A359C] text-white text-xs font-bold hover:bg-[#4C2275] transition-all cursor-pointer">
-                        Mengerti
+                    <button type="button" id="btn-close-modal-dyn" class="tactile-btn px-4 py-2 rounded-xl bg-[#6A359C] text-white text-xs font-bold hover:bg-[#4C2275] cursor-pointer">
+                        Tutup Notifikasi
                     </button>
                 `;
                 document.getElementById("btn-close-modal-dyn").addEventListener("click", closeModal);
@@ -1246,6 +1673,12 @@ function formatIndoDateTime(dateObj) {
                 return;
             }
 
+            if (!notifyUser && isSettingsUnlocked && isEditingSettings) {
+                return;
+            }
+
+            if (notifyUser) triggerTopProgress(true);
+
             const spinIcon = document.getElementById("icon-sync-spin");
             if (spinIcon && notifyUser) spinIcon.classList.add("animate-spin");
 
@@ -1263,16 +1696,18 @@ function formatIndoDateTime(dateObj) {
                 const res = await fetch(url);
                 const json = await res.json();
                 if (json && json.status === "success") {
-                    // Terapkan pengaturan terbaru dari Google Sheets ke semua HP
-                    if (json.config && typeof json.config === "object") {
-                        const prevConfigStr = JSON.stringify(config);
+                    if (json.config && typeof json.config === "object" && !(isSettingsUnlocked && isEditingSettings)) {
+                        const prevCloudStr = JSON.stringify(buildCloudConfigPayload());
                         const mergedConfig = Object.assign({}, DEFAULT_CONFIG, json.config, {
+                            adminPassword: config.adminPassword,
                             sheetsWebAppUrl: url
                         });
+                        const { adminPassword: _ignoredPwd, ...nextCloudObj } = mergedConfig;
 
-                        if (JSON.stringify(mergedConfig) !== prevConfigStr) {
+                        if (JSON.stringify(nextCloudObj) !== prevCloudStr) {
                             config = mergedConfig;
                             saveConfig();
+                            populateDivisionSelects();
                             syncHeaderAndLabels();
                             if (!config.waves[selectedWaveIdx] || !config.waves[selectedWaveIdx].isOpen) {
                                 selectedWaveIdx = findFirstOpenWaveIndex();
@@ -1289,10 +1724,10 @@ function formatIndoDateTime(dateObj) {
                         }
                     }
 
-                    // Perbarui data rekap audit
-                    if (Array.isArray(json.data)) {
-                        submissions = json.data;
+                    if (Array.isArray(json.data) && !(skipAutoSyncUntilManual && !notifyUser)) {
+                        submissions = sanitizeSubmissions(json.data);
                         saveSubmissions();
+                        syncHeaderAndLabels();
                         renderAdminDashboard();
                     }
 
@@ -1318,12 +1753,10 @@ function formatIndoDateTime(dateObj) {
                 }
             } finally {
                 if (spinIcon) spinIcon.classList.remove("animate-spin");
+                if (notifyUser) triggerTopProgress(false);
             }
         }
 
-        // -----------------------------------------------------------------
-        // RENDER PERTANYAAN DINAMIS (FLEKSIBEL 1..N PERTANYAAN)
-        // -----------------------------------------------------------------
         function renderDynamicQuestions() {
             const wave = config.waves[selectedWaveIdx] || config.waves[0];
             document.getElementById("form-wave-title").textContent = `Pertanyaan Evaluasi — ${wave.title}`;
@@ -1333,25 +1766,24 @@ function formatIndoDateTime(dateObj) {
             fieldValidState = wave.questions.map(() => false);
 
             container.innerHTML = wave.questions.map((q, idx) => `
-                <div class="space-y-2">
+                <div class="space-y-3">
                     <label for="textarea-q-${idx}" class="block text-xs sm:text-sm font-bold text-slate-800">
                         ${escapeHTML(q.label)} <span class="text-rose-500">*</span>
                     </label>
                     <textarea id="textarea-q-${idx}" data-q-idx="${idx}" rows="4"
                         placeholder="${escapeHTML(q.placeholder)}"
-                        class="audit-answer-textarea w-full px-3.5 py-3 rounded-xl border border-slate-300 text-xs sm:text-sm text-slate-800 leading-relaxed focus:outline-none focus:ring-2 focus:ring-[#6A359C] focus:border-[#6A359C] transition-all"></textarea>
+                        class="audit-answer-textarea w-full px-3.5 py-3 rounded-xl border border-slate-300 bg-white text-xs sm:text-sm text-slate-800 leading-relaxed focus:outline-none focus:ring-2 focus:ring-[#6A359C] focus:border-[#6A359C]"></textarea>
 
-                    <!-- Progress Bar & Penghitung Karakter/Kata -->
                     <div class="space-y-1.5 pt-0.5">
-                        <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                        <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden">
                             <div id="progress-bar-${idx}" class="progress-bar-fill h-full w-0 bg-rose-500 rounded-full"></div>
                         </div>
                         <div class="flex flex-wrap items-center justify-between gap-2 text-[11px]">
                             <span id="status-badge-${idx}" class="font-semibold text-rose-600">
-                                Belum memenuhi batas minimal
+                                Belum memenuhi batas minimal (0%)
                             </span>
-                            <span id="counter-text-${idx}" class="font-mono text-slate-500">
-                                0 / ${config.minChars} karakter • 0 / ${config.minWords} kata
+                            <span id="counter-text-${idx}" class="font-mono text-slate-500 tabular-nums">
+                                Progres 0% (0/${config.minChars} karakter • 0/${config.minWords} kata)
                             </span>
                         </div>
                     </div>
@@ -1395,19 +1827,19 @@ function formatIndoDateTime(dateObj) {
 
             if (badgeEl) {
                 if (isValid) {
-                    badgeEl.className = "font-bold text-emerald-600";
-                    badgeEl.textContent = "✓ Memenuhi standar kedalaman";
+                    badgeEl.className = "font-bold text-emerald-700";
+                    badgeEl.textContent = "✓ Memenuhi standar kedalaman (100%)";
                 } else if (pct >= 50) {
                     badgeEl.className = "font-semibold text-amber-600";
-                    badgeEl.textContent = "Hampir cukup, tambahkan sedikit penjelasan lagi...";
+                    badgeEl.textContent = `Hampir cukup (${pct}%), tambahkan penjelasan lagi...`;
                 } else {
                     badgeEl.className = "font-semibold text-rose-600";
-                    badgeEl.textContent = "Terlalu singkat — uraikan lebih detail";
+                    badgeEl.textContent = `Terlalu singkat (${pct}%) — uraikan lebih detail`;
                 }
             }
 
             if (countEl) {
-                countEl.textContent = `${charCount} / ${minC} karakter • ${wordCount} / ${minW} kata`;
+                countEl.textContent = `Progres ${pct}% (${charCount}/${minC} karakter • ${wordCount}/${minW} kata)`;
             }
 
             updateSubmitButtonState();
@@ -1425,12 +1857,12 @@ function formatIndoDateTime(dateObj) {
 
             if (allValid) {
                 btn.disabled = false;
-                btn.className = "w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-display font-bold text-sm text-white bg-[#6A359C] hover:bg-[#4C2275] cursor-pointer transition-all shadow-md";
+                btn.className = "tactile-btn w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-display font-bold text-sm text-white bg-[#6A359C] hover:bg-[#4C2275] cursor-pointer shadow-sm";
                 textEl.textContent = `Kirim Laporan ${wave ? wave.title : "Audit"}`;
                 warnBox.classList.add("hidden");
             } else {
                 btn.disabled = true;
-                btn.className = "w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-display font-bold text-sm text-white bg-slate-300 cursor-not-allowed transition-all shadow-sm";
+                btn.className = "tactile-btn w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-display font-bold text-sm text-white bg-slate-300 cursor-not-allowed shadow-sm";
                 textEl.textContent = anyWaveOpen
                     ? "Kirim Laporan Audit (Lengkapi Uraian)"
                     : "Semua Gelombang Audit Terkunci";
@@ -1438,9 +1870,6 @@ function formatIndoDateTime(dateObj) {
             }
         }
 
-        // -----------------------------------------------------------------
-        // MODE PRIVASI: TERIDENTIFIKASI VS ANONIM
-        // -----------------------------------------------------------------
         function handlePrivacyChange() {
             const selected = document.querySelector('input[name="privacyMode"]:checked');
             const isAnon = selected && selected.value === "anonymous";
@@ -1461,6 +1890,15 @@ function formatIndoDateTime(dateObj) {
         function saveFormDraft() {
             const wave = config.waves[selectedWaveIdx];
             if (!wave) return;
+
+            const modeEl = document.querySelector('input[name="privacyMode"]:checked');
+            const identityDraft = {
+                privacyMode: modeEl ? modeEl.value : "identified",
+                nama: document.getElementById("input-nama").value,
+                divisi: document.getElementById("select-divisi").value
+            };
+            localStorage.setItem("audit_draft_identity", JSON.stringify(identityDraft));
+
             const drafts = wave.questions.map((_, idx) => {
                 const ta = document.getElementById(`textarea-q-${idx}`);
                 return ta ? ta.value : "";
@@ -1469,6 +1907,24 @@ function formatIndoDateTime(dateObj) {
         }
 
         function restoreFormDraft() {
+            try {
+                const rawIdentity = localStorage.getItem("audit_draft_identity");
+                if (rawIdentity) {
+                    const idDraft = JSON.parse(rawIdentity);
+                    if (idDraft.privacyMode) {
+                        const radio = document.querySelector(`input[name="privacyMode"][value="${idDraft.privacyMode}"]`);
+                        if (radio) radio.checked = true;
+                        handlePrivacyChange();
+                    }
+                    if (idDraft.privacyMode !== "anonymous" && idDraft.nama) {
+                        document.getElementById("input-nama").value = idDraft.nama;
+                    }
+                    if (idDraft.divisi) {
+                        document.getElementById("select-divisi").value = idDraft.divisi;
+                    }
+                }
+            } catch (e) {}
+
             const wave = config.waves[selectedWaveIdx];
             if (!wave) return;
             try {
@@ -1490,17 +1946,17 @@ function formatIndoDateTime(dateObj) {
         function clearFormInputs() {
             const wave = config.waves[selectedWaveIdx];
             if (wave) localStorage.removeItem(`audit_draft_${wave.title}`);
+            localStorage.removeItem("audit_draft_identity");
+
             const radioIdentified = document.querySelector('input[name="privacyMode"][value="identified"]');
             if (radioIdentified) radioIdentified.checked = true;
             handlePrivacyChange();
             document.getElementById("input-nama").value = "";
             document.getElementById("select-divisi").value = "";
             renderDynamicQuestions();
+            setFormStep(1);
         }
 
-        // -----------------------------------------------------------------
-        // SUBMIT FORMULIR AUDIT (LOCAL + GOOGLE SHEETS POST)
-        // -----------------------------------------------------------------
         async function handleAuditFormSubmit(e) {
             e.preventDefault();
 
@@ -1517,7 +1973,7 @@ function formatIndoDateTime(dateObj) {
             const modeEl = document.querySelector('input[name="privacyMode"]:checked');
             const isAnon = modeEl && modeEl.value === "anonymous";
             const namaVal = isAnon ? "Anonim" : document.getElementById("input-nama").value.trim();
-            const divisiVal = document.getElementById("select-divisi").value;
+            const divisiVal = normalizeDivisionInput(document.getElementById("select-divisi").value);
 
             if (!isAnon && !namaVal) {
                 showModal({
@@ -1532,7 +1988,7 @@ function formatIndoDateTime(dateObj) {
                 showModal({
                     type: "warning",
                     title: "Inti / Biro / Divisi Wajib Dipilih",
-                    message: "Baik mode Teridentifikasi maupun Anonim tetap wajib memilih asal Inti / Biro / Divisi."
+                    message: "Silakan ketik dan pilih salah satu Inti / Biro / Divisi resmi dari daftar pilihan."
                 });
                 return;
             }
@@ -1564,8 +2020,13 @@ function formatIndoDateTime(dateObj) {
 
             const btn = document.getElementById("btn-submit-audit");
             const textEl = document.getElementById("text-submit-audit");
+            const lockIcon = document.getElementById("icon-submit-lock");
             btn.disabled = true;
             textEl.textContent = "Mengirim Laporan...";
+            if (lockIcon) {
+                lockIcon.outerHTML = `<svg id="icon-submit-lock" class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle><path class="opacity-90" fill="currentColor" d="M4 12a8 8 0 018-8v3a5 5 0 00-5 5H4z"></path></svg>`;
+            }
+            triggerTopProgress(true);
 
             let sheetsStatusNote = "";
             const sheetsUrl = (config.sheetsWebAppUrl || "").trim();
@@ -1591,33 +2052,71 @@ function formatIndoDateTime(dateObj) {
                         headers: { "Content-Type": "text/plain;charset=utf-8" },
                         body: JSON.stringify(payload)
                     });
-                    sheetsStatusNote = " Laporan juga telah otomatis terkirim ke Google Sheets Biro Audit Internal.";
+                    sheetsStatusNote = " Laporan otomatis tersimpan di Google Sheets Biro Audit Internal.";
                 } catch (err) {
                     console.error("Gagal POST ke Google Sheets:", err);
-                    sheetsStatusNote = " (Tersimpan di perangkat lokal; koneksi ke Google Sheets sedang terkendala).";
+                    sheetsStatusNote = " (Tersimpan lokal; koneksi ke Google Sheets sedang terkendala).";
                 }
             }
 
+            const spinnerEl = document.getElementById("icon-submit-lock");
+            if (spinnerEl) {
+                spinnerEl.outerHTML = `<svg id="icon-submit-lock" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>`;
+            }
+            triggerTopProgress(false);
+
+            skipAutoSyncUntilManual = false;
             submissions.unshift(entry);
             saveSubmissions();
+            syncHeaderAndLabels();
             updateBadgeCount();
             clearFormInputs();
+
+            const receiptCardHtml = `
+                <div class="p-3.5 rounded-xl bg-[#F2F5F3] border-2 border-dashed border-[#2D6A4F] text-xs space-y-1.5">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-1.5">
+                        <span class="font-bold text-[#163829] uppercase tracking-wider text-[10px]">Bukti Pengisian Resmi</span>
+                        <span class="font-mono font-extrabold text-[#163829] bg-[#EBCB38] px-2 py-0.5 rounded-md text-[11px]">#${escapeHTML(entry.id)}</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-1 pt-0.5">
+                        <span class="text-slate-500">Periode:</span>
+                        <span class="col-span-2 font-bold text-slate-800">${escapeHTML(entry.periodeName)} • ${escapeHTML(entry.waveTitle)}</span>
+                        <span class="text-slate-500">Pengisi:</span>
+                        <span class="col-span-2 font-bold text-slate-800">${escapeHTML(entry.nama)}</span>
+                        <span class="text-slate-500">Bidang:</span>
+                        <span class="col-span-2 font-bold text-slate-800">${escapeHTML(entry.divisi)}</span>
+                        <span class="text-slate-500">Waktu:</span>
+                        <span class="col-span-2 font-medium text-slate-700">${escapeHTML(entry.timestamp)}</span>
+                    </div>
+                </div>
+            `;
+
+            const receiptCopyText = `BUKTI PENGISIAN AUDIT HIMAGI KM FKM UNAND\nID Laporan: #${entry.id}\nPeriode: ${entry.periodeName} (${entry.waveTitle})\nPengisi: ${entry.nama}\nBidang: ${entry.divisi}\nWaktu: ${entry.timestamp}`;
 
             showModal({
                 type: "success",
                 title: `Laporan ${wave.title} Berhasil Dikirim!`,
-                subtitle: timestampStr,
+                subtitle: "Silakan screenshot kartu di bawah sebagai bukti pengisian",
                 message: `Terima kasih atas evaluasi Anda mewakili ${divisiVal}.${sheetsStatusNote}`,
+                extraHtml: receiptCardHtml,
                 footerHtml: `
-                    <button type="button" id="btn-modal-to-rekap" class="px-4 py-2 rounded-xl border border-[#6A359C] text-[#6A359C] text-xs font-bold hover:bg-[#F3EBF9] transition-all cursor-pointer">
-                        Lihat Rekap Audit
+                    <button type="button" id="btn-modal-copy-receipt" class="tactile-btn px-3.5 py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-100 cursor-pointer">
+                        Salin Bukti
                     </button>
-                    <button type="button" id="btn-modal-done" class="px-4 py-2 rounded-xl bg-[#6A359C] text-white text-xs font-bold hover:bg-[#4C2275] transition-all cursor-pointer">
+                    <button type="button" id="btn-modal-to-rekap" class="tactile-btn px-3.5 py-2 rounded-xl border border-[#6A359C] text-[#6A359C] text-xs font-bold hover:bg-[#F3EBF9] cursor-pointer">
+                        Lihat Rekap
+                    </button>
+                    <button type="button" id="btn-modal-done" class="tactile-btn px-4 py-2 rounded-xl bg-[#6A359C] text-white text-xs font-bold hover:bg-[#4C2275] cursor-pointer">
                         Selesai
                     </button>
                 `
             });
 
+            document.getElementById("btn-modal-copy-receipt").addEventListener("click", (ev) => {
+                copyTextModern(receiptCopyText, () => {
+                    ev.target.textContent = "✓ Bukti Tersalin";
+                });
+            });
             document.getElementById("btn-modal-to-rekap").addEventListener("click", () => {
                 closeModal();
                 switchTab("admin");
@@ -1625,11 +2124,9 @@ function formatIndoDateTime(dateObj) {
             document.getElementById("btn-modal-done").addEventListener("click", closeModal);
         }
 
-        // -----------------------------------------------------------------
-        // TAB 2: REKAP AUDIT & SINKRONISASI GOOGLE SHEETS
-        // -----------------------------------------------------------------
         function updateBadgeCount() {
-            document.getElementById("badge-total-count").textContent = submissions.length;
+            const currentPeriodeSubs = submissions.filter(s => !s.periodeName || s.periodeName === config.periodeName);
+            document.getElementById("badge-total-count").textContent = currentPeriodeSubs.length;
         }
 
         function updateSheetsBadgeUI() {
@@ -1639,7 +2136,7 @@ function formatIndoDateTime(dateObj) {
             if (!dot || !label) return;
 
             if (hasUrl) {
-                dot.className = "w-2.5 h-2.5 rounded-full bg-emerald-500";
+                dot.className = "w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse";
                 label.textContent = "Terhubung Real-Time ke Google Sheets Biro Audit Internal";
             } else {
                 dot.className = "w-2.5 h-2.5 rounded-full bg-amber-400";
@@ -1651,11 +2148,16 @@ function formatIndoDateTime(dateObj) {
             updateBadgeCount();
             updateSheetsBadgeUI();
 
+            const pubPeriodeEl = document.getElementById("public-filter-periode");
             const pubWaveEl = document.getElementById("public-filter-wave");
+            const selectedPubPeriode = pubPeriodeEl ? pubPeriodeEl.value : "ALL";
             const selectedPubWave = pubWaveEl ? pubWaveEl.value : "ALL";
-            const visibleSubmissions = selectedPubWave === "ALL"
-                ? submissions
-                : submissions.filter(s => s.waveTitle === selectedPubWave);
+
+            const visibleSubmissions = submissions.filter(s => {
+                const matchP = selectedPubPeriode === "ALL" || (s.periodeName || config.periodeName) === selectedPubPeriode;
+                const matchW = selectedPubWave === "ALL" || s.waveTitle === selectedPubWave;
+                return matchP && matchW;
+            });
 
             const total = visibleSubmissions.length;
             const anonCount = visibleSubmissions.filter(s => s.isAnonymous).length;
@@ -1674,17 +2176,17 @@ function formatIndoDateTime(dateObj) {
             document.getElementById("stat-anon").textContent = anonCount;
             document.getElementById("stat-avg-words").innerHTML = `${avgWords} <span class="text-xs font-normal text-slate-500">kata</span>`;
 
-            // Kartu jumlah pengisi per Inti / Biro / Divisi (dengan Target & Progress Bar)
             const divGrid = document.getElementById("division-summary-grid");
-            divGrid.innerHTML = DIVISIONS_LIST.map(divName => {
+            divGrid.innerHTML = getDivisions().map(divObj => {
+                const divName = divObj.name;
+                const target = Number(divObj.target) || 0;
                 const count = visibleSubmissions.filter(s => s.divisi === divName).length;
-                const target = DIVISION_TARGETS[divName] || 0;
                 const isSpecificWave = selectedPubWave !== "ALL";
                 const pct = target > 0 ? Math.min(100, Math.round((count / target) * 100)) : 0;
                 const isComplete = isSpecificWave && target > 0 && count >= target;
 
                 return `
-                    <div class="p-3 rounded-xl border-2 ${isComplete ? "border-emerald-500 bg-emerald-50" : count > 0 ? "border-[#2D6A4F] bg-[#D2E3D8]" : "border-slate-300 bg-white shadow-2xs"} flex flex-col justify-between">
+                    <div class="choice-tile p-3 rounded-xl border-2 ${isComplete ? "border-emerald-500 bg-emerald-50" : count > 0 ? "border-[#2D6A4F] bg-[#D2E3D8]/90" : "border-slate-300 bg-white"} flex flex-col justify-between">
                         <div class="flex items-start justify-between gap-1">
                             <span class="text-[11px] font-bold ${isComplete ? "text-emerald-950" : count > 0 ? "text-[#163829]" : "text-slate-800"} leading-tight line-clamp-2" title="${escapeHTML(divName)}">
                                 ${escapeHTML(divName)}
@@ -1693,14 +2195,14 @@ function formatIndoDateTime(dateObj) {
                         </div>
                         <div class="mt-2.5 space-y-1.5">
                             <div class="flex items-baseline justify-between">
-                                <span class="font-display font-extrabold text-base ${isComplete ? "text-emerald-700" : count > 0 ? "text-[#1B4332]" : "text-slate-600"}">
+                                <span class="font-display font-extrabold text-base tabular-nums ${isComplete ? "text-emerald-700" : count > 0 ? "text-[#1B4332]" : "text-slate-600"}">
                                     ${count}${isSpecificWave ? `<span class="text-xs font-semibold text-slate-500"> / ${target}</span>` : ""}
                                 </span>
-                                <span class="text-[10px] font-semibold text-slate-500">pengisi</span>
+                                <span class="text-[10px] font-semibold text-slate-500 tabular-nums">${isSpecificWave ? `${pct}%` : "pengisi"}</span>
                             </div>
                             ${isSpecificWave ? `
                                 <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden">
-                                    <div class="h-full ${isComplete ? "bg-emerald-600" : "bg-[#23533E]"} rounded-full transition-all" style="width: ${pct}%"></div>
+                                    <div class="progress-bar-fill h-full ${isComplete ? "bg-emerald-600" : "bg-[#23533E]"} rounded-full" style="width: ${pct}%"></div>
                                 </div>
                             ` : ""}
                         </div>
@@ -1711,19 +2213,25 @@ function formatIndoDateTime(dateObj) {
             renderSubmissionsList();
         }
 
-        function renderSubmissionsList() {
-            const container = document.getElementById("submissions-list-container");
+        function getFilteredAdminSubmissions() {
+            const periodeFilter = document.getElementById("filter-periode").value;
             const waveFilter = document.getElementById("filter-wave").value;
             const divFilter = document.getElementById("filter-divisi").value;
             const keyword = document.getElementById("filter-keyword").value.toLowerCase().trim();
 
-            const filtered = submissions.filter(item => {
+            return submissions.filter(item => {
+                const matchPeriode = periodeFilter === "ALL" || (item.periodeName || config.periodeName) === periodeFilter;
                 const matchWave = waveFilter === "ALL" || item.waveTitle === waveFilter;
                 const matchDiv = divFilter === "ALL" || item.divisi === divFilter;
-                const fullText = `${item.nama} ${item.divisi} ${item.waveTitle} ${(item.answers || []).map(a => a.answer).join(" ")}`.toLowerCase();
+                const fullText = `${item.id} ${item.nama} ${item.divisi} ${item.waveTitle} ${item.periodeName || ""} ${(item.answers || []).map(a => a.answer).join(" ")}`.toLowerCase();
                 const matchKey = !keyword || fullText.includes(keyword);
-                return matchWave && matchDiv && matchKey;
+                return matchPeriode && matchWave && matchDiv && matchKey;
             });
+        }
+
+        function renderSubmissionsList() {
+            const container = document.getElementById("submissions-list-container");
+            const filtered = getFilteredAdminSubmissions();
 
             if (filtered.length === 0) {
                 container.innerHTML = `
@@ -1744,6 +2252,12 @@ function formatIndoDateTime(dateObj) {
                         <div class="flex flex-wrap items-start justify-between gap-3 border-b border-slate-100 pb-3.5">
                             <div class="space-y-1">
                                 <div class="flex flex-wrap items-center gap-2">
+                                    <span class="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-slate-100 text-slate-600 border border-slate-200">
+                                        #${escapeHTML(item.id)}
+                                    </span>
+                                    <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-[#EBCB38] text-[#163829]">
+                                        ${escapeHTML(item.periodeName || config.periodeName)}
+                                    </span>
                                     <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-[#6A359C] text-white">
                                         ${escapeHTML(item.waveTitle)}
                                     </span>
@@ -1759,9 +2273,15 @@ function formatIndoDateTime(dateObj) {
                                     ${escapeHTML(item.nama)}
                                 </h3>
                             </div>
-                            <div class="text-left sm:text-right text-[11px] text-slate-500 space-y-0.5">
-                                <div class="font-semibold text-slate-700">${escapeHTML(item.timestamp)}</div>
-                                <div>Total kedalaman: <strong class="text-[#6A359C]">${wordsCount} kata</strong></div>
+                            <div class="flex items-start gap-3">
+                                <div class="text-left sm:text-right text-[11px] text-slate-500 space-y-0.5">
+                                    <div class="font-semibold text-slate-700">${escapeHTML(item.timestamp)}</div>
+                                    <div>Total kedalaman: <strong class="text-[#6A359C]">${wordsCount} kata</strong></div>
+                                </div>
+                                <button type="button" data-delete-entry-id="${escapeHTML(item.id)}" title="Hapus laporan ini"
+                                    class="btn-delete-entry px-2.5 py-1.5 rounded-lg border border-rose-200 bg-rose-50 hover:bg-rose-100 text-rose-700 text-[11px] font-bold cursor-pointer shrink-0">
+                                    Hapus
+                                </button>
                             </div>
                         </div>
 
@@ -1782,55 +2302,77 @@ function formatIndoDateTime(dateObj) {
             }).join("");
         }
 
+        async function deleteSingleEntry(entryId) {
+            const target = submissions.find(s => s.id === entryId);
+            if (!target) return;
+
+            submissions = submissions.filter(s => s.id !== entryId);
+            saveSubmissions();
+            syncHeaderAndLabels();
+            updateBadgeCount();
+            renderAdminDashboard();
+            renderSubmissionsList();
+
+            const sheetsUrl = (config.sheetsWebAppUrl || "").trim();
+            if (sheetsUrl) {
+                try {
+                    await fetch(sheetsUrl, {
+                        method: "POST",
+                        mode: "no-cors",
+                        headers: { "Content-Type": "text/plain;charset=utf-8" },
+                        body: JSON.stringify({
+                            action: "deleteEntry",
+                            id: entryId
+                        })
+                    });
+                } catch (err) {
+                    console.error("Gagal menghapus baris di Google Sheets:", err);
+                }
+            }
+        }
+
         function copySummaryToClipboard() {
-            if (submissions.length === 0) {
+            const listToCopy = getFilteredAdminSubmissions();
+            if (listToCopy.length === 0) {
                 showModal({
                     type: "warning",
                     title: "Data Rekap Masih Kosong",
-                    message: "Belum ada laporan audit yang dapat disalin."
+                    message: "Belum ada laporan audit sesuai filter saat ini yang dapat disalin."
                 });
                 return;
             }
 
             const lines = [
                 `REKAP AUDIT Himpunan Mahasiswa Gizi KM FKM UNAND (${config.periodeName.toUpperCase()})`,
-                `Total Laporan Masuk: ${submissions.length}`,
+                `Total Laporan: ${listToCopy.length}`,
                 `==================================================`,
-                ...submissions.map((s, idx) => {
+                ...listToCopy.map((s, idx) => {
                     const qaText = (s.answers || []).map(a => `- ${a.question}\n  Jawab: ${a.answer}`).join("\n");
-                    return `\n[${idx + 1}] ${s.waveTitle} | ${s.divisi} | ${s.nama} (${s.timestamp})\n${qaText}`;
+                    return `\n[${idx + 1}] #${s.id} | ${s.periodeName || config.periodeName} | ${s.waveTitle} | ${s.divisi} | ${s.nama} (${s.timestamp})\n${qaText}`;
                 })
             ];
 
-            const ta = document.createElement("textarea");
-            ta.value = lines.join("\n");
-            document.body.appendChild(ta);
-            ta.select();
-            try {
-                document.execCommand("copy");
+            copyTextModern(lines.join("\n"), () => {
                 showModal({
                     type: "success",
                     title: "Ringkasan Berhasil Disalin!",
-                    message: `Ringkasan dari ${submissions.length} laporan audit telah disalin ke clipboard dan siap ditempel ke WhatsApp/Dokumen.`
+                    message: `Ringkasan dari ${listToCopy.length} laporan audit telah disalin ke clipboard dan siap ditempel ke WhatsApp/Dokumen.`
                 });
-            } catch (err) {
-                console.error(err);
-            }
-            document.body.removeChild(ta);
+            });
         }
 
         function exportToCSV() {
-            if (submissions.length === 0) {
+            const listToExport = getFilteredAdminSubmissions();
+            if (listToExport.length === 0) {
                 showModal({
                     type: "warning",
                     title: "Data Rekap Masih Kosong",
-                    message: "Belum ada laporan audit yang dapat diunduh."
+                    message: "Belum ada laporan audit sesuai filter saat ini yang dapat diunduh."
                 });
                 return;
             }
 
-            // Cari jumlah pertanyaan maksimal di antara seluruh laporan agar kolom CSV dinamis
-            const maxQ = submissions.reduce((max, item) => Math.max(max, (item.answers || []).length), 1);
+            const maxQ = listToExport.reduce((max, item) => Math.max(max, (item.answers || []).length), 1);
             const dynamicHeaders = [];
             for (let i = 0; i < maxQ; i++) {
                 dynamicHeaders.push(`Pertanyaan ${i + 1}`, `Jawaban ${i + 1}`);
@@ -1842,7 +2384,7 @@ function formatIndoDateTime(dateObj) {
                 ...dynamicHeaders
             ];
 
-            const rows = submissions.map(item => {
+            const rows = listToExport.map(item => {
                 const qCols = [];
                 for (let i = 0; i < maxQ; i++) {
                     qCols.push(item.answers[i]?.question || "", item.answers[i]?.answer || "");
@@ -1873,9 +2415,6 @@ function formatIndoDateTime(dateObj) {
             document.body.removeChild(link);
         }
 
-        // -----------------------------------------------------------------
-        // TAB 3: PENGATURAN (PASSWORD, GELOMBANG DINAMIS, GOOGLE SHEETS)
-        // -----------------------------------------------------------------
         function renderSettingsView() {
             const lockView = document.getElementById("settings-lock-view");
             const unlockedView = document.getElementById("settings-unlocked-view");
@@ -1890,20 +2429,49 @@ function formatIndoDateTime(dateObj) {
             unlockedView.classList.remove("hidden");
 
             document.getElementById("cfg-periode").value = config.periodeName;
+            document.getElementById("cfg-cabinet-name").value = config.cabinetName || "Kabinet Astravena";
+            document.getElementById("cfg-cabinet-logo").value = config.cabinetLogo || "logo-kabinet.png";
             document.getElementById("cfg-password").value = config.adminPassword;
             document.getElementById("cfg-min-chars").value = config.minChars;
             document.getElementById("cfg-min-words").value = config.minWords;
             document.getElementById("cfg-sheets-url").value = config.sheetsWebAppUrl || "";
             document.getElementById("cfg-wave-total").textContent = config.waves.length;
+            document.getElementById("cfg-div-total").textContent = getDivisions().length;
 
+            renderSettingsDivisionsList();
             renderSettingsWavesList();
             renderSubmissionsList();
+        }
+
+        function renderSettingsDivisionsList() {
+            const container = document.getElementById("cfg-divisions-list");
+            const divs = getDivisions();
+            container.innerHTML = divs.map((d, dIdx) => `
+                <div class="p-3 rounded-xl bg-white border border-slate-200 flex items-center gap-2">
+                    <div class="flex-1 min-w-0">
+                        <label class="block text-[10px] font-semibold text-slate-500 mb-1">Nama Inti / Biro / Divisi</label>
+                        <input type="text" data-div-field="name" data-didx="${dIdx}" value="${escapeHTML(d.name)}"
+                            class="cfg-div-input w-full px-2.5 py-1.5 rounded-lg border border-slate-300 text-xs font-semibold text-slate-800 focus:outline-none focus:border-[#6A359C]">
+                    </div>
+                    <div class="w-20 shrink-0">
+                        <label class="block text-[10px] font-semibold text-slate-500 mb-1">Target</label>
+                        <input type="number" min="1" max="100" data-div-field="target" data-didx="${dIdx}" value="${Number(d.target) || 1}"
+                            class="cfg-div-input w-full px-2.5 py-1.5 rounded-lg border border-slate-300 text-xs font-bold text-center text-slate-800 focus:outline-none focus:border-[#6A359C]">
+                    </div>
+                    ${divs.length > 1 ? `
+                        <button type="button" data-delete-didx="${dIdx}" title="Hapus bidang ini"
+                            class="btn-delete-division self-end px-2.5 py-1.5 rounded-lg border border-rose-200 bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-bold cursor-pointer">
+                            ✕
+                        </button>
+                    ` : ""}
+                </div>
+            `).join("");
         }
 
         function renderSettingsWavesList() {
             const container = document.getElementById("cfg-waves-list");
             container.innerHTML = config.waves.map((wave, wIdx) => `
-                <div class="p-4 sm:p-5 rounded-2xl border ${wave.isOpen ? "border-purple-200 bg-[#F3EBF9]/25" : "border-slate-200 bg-slate-50/70"} space-y-4">
+                <div class="p-4 sm:p-5 rounded-2xl border ${wave.isOpen ? "border-purple-200 bg-[#F3EBF9]/25" : "border-slate-200 bg-slate-50"} space-y-4">
                     <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200/80 pb-3">
                         <div class="flex flex-wrap items-center gap-2">
                             <input type="text" data-wave-field="title" data-widx="${wIdx}" value="${escapeHTML(wave.title)}"
@@ -1919,37 +2487,36 @@ function formatIndoDateTime(dateObj) {
                         </div>
                         ${config.waves.length > 1 ? `
                             <button type="button" data-delete-widx="${wIdx}"
-                                class="btn-delete-wave px-3 py-1.5 rounded-lg border border-rose-200 bg-white hover:bg-rose-50 text-rose-600 text-xs font-bold transition-all cursor-pointer">
+                                class="btn-delete-wave px-3 py-1.5 rounded-lg border border-rose-200 bg-white hover:bg-rose-50 text-rose-600 text-xs font-bold cursor-pointer">
                                 Hapus Gelombang
                             </button>
                         ` : ""}
                     </div>
 
                     <div>
-                        <label class="block text-[11px] font-bold text-slate-600 mb-1">Deskripsi Fokus Evaluasi</label>
+                        <label class="block text-[11px] font-bold text-slate-600 mb-2">Deskripsi Fokus Evaluasi</label>
                         <input type="text" data-wave-field="subtitle" data-widx="${wIdx}" value="${escapeHTML(wave.subtitle)}"
                             class="cfg-wave-input w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs focus:outline-none focus:border-[#6A359C]">
                     </div>
 
-                    <!-- Kelola Daftar Pertanyaan Gelombang Ini (Tambah / Kurangi / Edit) -->
                     <div class="space-y-3 pt-1">
                         <div class="flex flex-wrap items-center justify-between gap-2">
-                            <span class="text-xs font-bold text-slate-700">Daftar Pertanyaan Evaluasi (${wave.title})</span>
+                            <span class="text-xs font-bold text-slate-700">Daftar Pertanyaan Evaluasi (${escapeHTML(wave.title)})</span>
                             <button type="button" data-add-q-widx="${wIdx}"
-                                class="btn-add-question inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#6A359C] hover:bg-[#4C2275] text-white text-xs font-bold transition-all shadow-2xs cursor-pointer">
+                                class="btn-add-question inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#6A359C] hover:bg-[#4C2275] text-white text-xs font-bold cursor-pointer">
                                 <span>+ Tambah Pertanyaan</span>
                             </button>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                             ${wave.questions.map((q, qIdx) => `
-                                <div class="p-3.5 rounded-xl bg-white border border-slate-200 space-y-2 shadow-2xs">
+                                <div class="p-3.5 rounded-xl bg-white border border-slate-200 space-y-2.5">
                                     <div class="flex items-center justify-between gap-2">
                                         <span class="text-[11px] font-extrabold text-[#6A359C] uppercase tracking-wider">Pertanyaan ${qIdx + 1}</span>
                                         ${wave.questions.length > 1 ? `
                                             <button type="button" data-del-q-widx="${wIdx}" data-del-q-qidx="${qIdx}"
                                                 title="Hapus pertanyaan ini"
-                                                class="btn-delete-question inline-flex items-center gap-1 px-2 py-1 rounded-md border border-rose-200 bg-rose-50/70 hover:bg-rose-100 text-rose-700 text-[11px] font-bold transition-all cursor-pointer">
+                                                class="btn-delete-question inline-flex items-center gap-1 px-2 py-1 rounded-md border border-rose-200 bg-rose-50 hover:bg-rose-100 text-rose-700 text-[11px] font-bold cursor-pointer">
                                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
                                                 <span>Hapus</span>
                                             </button>
@@ -1958,12 +2525,12 @@ function formatIndoDateTime(dateObj) {
                                         `}
                                     </div>
                                     <div>
-                                        <label class="block text-[10px] font-semibold text-slate-500 mb-0.5">Judul / Teks Pertanyaan</label>
+                                        <label class="block text-[10px] font-semibold text-slate-500 mb-1.5">Judul / Teks Pertanyaan</label>
                                         <input type="text" data-wave-qlabel="true" data-widx="${wIdx}" data-qidx="${qIdx}" value="${escapeHTML(q.label)}"
                                             class="cfg-wave-input w-full px-2.5 py-1.5 rounded-lg border border-slate-300 text-xs font-semibold text-slate-800 focus:outline-none focus:border-[#6A359C]">
                                     </div>
                                     <div>
-                                        <label class="block text-[10px] font-semibold text-slate-500 mb-0.5">Petunjuk / Placeholder Jawaban</label>
+                                        <label class="block text-[10px] font-semibold text-slate-500 mb-1.5">Petunjuk / Placeholder Jawaban</label>
                                         <textarea rows="2" data-wave-qplaceholder="true" data-widx="${wIdx}" data-qidx="${qIdx}"
                                             class="cfg-wave-input w-full px-2.5 py-1.5 rounded-lg border border-slate-300 text-[11px] text-slate-600 focus:outline-none focus:border-[#6A359C]">${escapeHTML(q.placeholder)}</textarea>
                                     </div>
@@ -1975,14 +2542,36 @@ function formatIndoDateTime(dateObj) {
             `).join("");
         }
 
-        function captureSettingsInputs() {
+        function captureSettingsInputs(clampLimits = true) {
             if (!isSettingsUnlocked) return;
             config.periodeName = document.getElementById("cfg-periode").value.trim() || "Periode 2026";
+            config.cabinetName = document.getElementById("cfg-cabinet-name").value.trim() || "Kabinet Astravena";
+            config.cabinetLogo = document.getElementById("cfg-cabinet-logo").value.trim() || "logo-kabinet.png";
             const passVal = document.getElementById("cfg-password").value.trim();
             if (passVal) config.adminPassword = passVal;
-            config.minChars = Math.max(10, parseInt(document.getElementById("cfg-min-chars").value, 10) || 150);
-            config.minWords = Math.max(3, parseInt(document.getElementById("cfg-min-words").value, 10) || 25);
+
+            const rawChars = parseInt(document.getElementById("cfg-min-chars").value, 10);
+            const rawWords = parseInt(document.getElementById("cfg-min-words").value, 10);
+            if (!isNaN(rawChars)) {
+                config.minChars = clampLimits ? Math.max(10, rawChars) : rawChars;
+            }
+            if (!isNaN(rawWords)) {
+                config.minWords = clampLimits ? Math.max(3, rawWords) : rawWords;
+            }
             config.sheetsWebAppUrl = document.getElementById("cfg-sheets-url").value.trim();
+
+            const divs = getDivisions();
+            document.querySelectorAll(".cfg-div-input").forEach(el => {
+                const dIdx = parseInt(el.getAttribute("data-didx"), 10);
+                if (!divs[dIdx]) return;
+                const field = el.getAttribute("data-div-field");
+                if (field === "name") divs[dIdx].name = el.value.trim() || `Bidang ${dIdx + 1}`;
+                if (field === "target") {
+                    const tVal = parseInt(el.value, 10);
+                    if (!isNaN(tVal)) divs[dIdx].target = clampLimits ? Math.max(1, tVal) : tVal;
+                }
+            });
+            config.divisions = divs;
 
             document.querySelectorAll(".cfg-wave-input").forEach(el => {
                 const wIdx = parseInt(el.getAttribute("data-widx"), 10);
@@ -2005,9 +2594,12 @@ function formatIndoDateTime(dateObj) {
             });
         }
 
-        // -----------------------------------------------------------------
-        // PEMASANGAN SELURUH EVENT LISTENER SAAT DOM SIAP
-        // -----------------------------------------------------------------
+        function persistDraftConfigNow() {
+            captureSettingsInputs(false);
+            saveConfig();
+            isEditingSettings = true;
+        }
+
         document.addEventListener("DOMContentLoaded", () => {
             populateDivisionSelects();
             syncHeaderAndLabels();
@@ -2016,24 +2608,24 @@ function formatIndoDateTime(dateObj) {
             renderDynamicQuestions();
             restoreFormDraft();
             updateBadgeCount();
+            initInteractiveMotion();
 
             if (config.sheetsWebAppUrl) {
                 syncFromGoogleSheets(false);
 
                 setInterval(() => {
-                    if (!document.hidden) {
+                    if (!document.hidden && !(isSettingsUnlocked && isEditingSettings)) {
                         syncFromGoogleSheets(false);
                     }
                 }, 15000);
 
                 document.addEventListener("visibilitychange", () => {
-                    if (!document.hidden) {
+                    if (!document.hidden && !(isSettingsUnlocked && isEditingSettings)) {
                         syncFromGoogleSheets(false);
                     }
                 });
             }
 
-            // 1. Klik Navigasi Tab
             document.querySelectorAll(".nav-tab-btn").forEach(btn => {
                 btn.addEventListener("click", () => {
                     const targetTab = btn.getAttribute("data-tab");
@@ -2041,7 +2633,51 @@ function formatIndoDateTime(dateObj) {
                 });
             });
 
-            // 2. Klik Pilih Gelombang Audit (Delegation)
+            document.getElementById("btn-next-step").addEventListener("click", () => {
+                const wave = config.waves[selectedWaveIdx];
+                if (!wave || !wave.isOpen) {
+                    showModal({
+                        type: "warning",
+                        title: "Gelombang Audit Terkunci",
+                        message: "Saat ini belum ada gelombang audit yang aktif untuk diisi."
+                    });
+                    return;
+                }
+
+                const modeEl = document.querySelector('input[name="privacyMode"]:checked');
+                const isAnon = modeEl && modeEl.value === "anonymous";
+                const namaVal = document.getElementById("input-nama").value.trim();
+                const divisiNormalized = normalizeDivisionInput(document.getElementById("select-divisi").value);
+
+                if (!isAnon && !namaVal) {
+                    showModal({
+                        type: "warning",
+                        title: "Nama Lengkap Wajib Diisi",
+                        message: "Isi nama lengkap Anda terlebih dahulu pada Tahap 1, atau pilih mode Anonim."
+                    });
+                    return;
+                }
+
+                if (!divisiNormalized) {
+                    showModal({
+                        type: "warning",
+                        title: "Inti / Biro / Divisi Belum Dipilih",
+                        message: "Silakan ketik huruf awal lalu pilih salah satu Inti / Biro / Divisi resmi dari daftar."
+                    });
+                    return;
+                }
+
+                document.getElementById("select-divisi").value = divisiNormalized;
+                saveFormDraft();
+                setFormStep(2);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+
+            document.getElementById("btn-prev-step").addEventListener("click", () => {
+                setFormStep(1);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+
             document.getElementById("wave-cards-container").addEventListener("click", (e) => {
                 const cardBtn = e.target.closest(".wave-select-btn");
                 if (!cardBtn) return;
@@ -2050,35 +2686,92 @@ function formatIndoDateTime(dateObj) {
                     selectedWaveIdx = idx;
                     renderWaveCards();
                     renderDynamicQuestions();
+                    restoreFormDraft();
                 }
             });
 
-            // 3. Ubah Mode Identitas (Teridentifikasi vs Anonim)
             document.querySelectorAll('input[name="privacyMode"]').forEach(radio => {
-                radio.addEventListener("change", handlePrivacyChange);
+                radio.addEventListener("change", () => {
+                    handlePrivacyChange();
+                    saveFormDraft();
+                });
             });
+            document.getElementById("input-nama").addEventListener("input", saveFormDraft);
+            document.getElementById("select-divisi").addEventListener("input", saveFormDraft);
 
-            // 4. Input Textarea Real-Time Validation (Delegation)
             document.getElementById("questions-container").addEventListener("input", (e) => {
                 if (e.target.classList.contains("audit-answer-textarea")) {
                     handleTextareaInput(e.target);
                 }
             });
 
-            // 5. Tombol Bersihkan Form & Submit Form
-            document.getElementById("btn-clear-form").addEventListener("click", clearFormInputs);
+            const confirmClearFormHandler = () => {
+                showModal({
+                    type: "warning",
+                    title: "Hapus Seluruh Isian Formulir?",
+                    message: "Semua data identitas (Tahap 1) dan jawaban evaluasi (Tahap 2) yang sudah diisi akan dihapus permanen.",
+                    footerHtml: `
+                        <button type="button" id="btn-cancel-clear-form" class="tactile-btn px-4 py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-100 cursor-pointer">
+                            Batal
+                        </button>
+                        <button type="button" id="btn-confirm-clear-form" class="tactile-btn px-4 py-2 rounded-xl bg-rose-600 text-white text-xs font-bold hover:bg-rose-700 cursor-pointer">
+                            Ya, Hapus Isian
+                        </button>
+                    `
+                });
+                document.getElementById("btn-cancel-clear-form").addEventListener("click", closeModal);
+                document.getElementById("btn-confirm-clear-form").addEventListener("click", () => {
+                    clearFormInputs();
+                    closeModal();
+                });
+            };
+            document.getElementById("btn-clear-form-step1").addEventListener("click", confirmClearFormHandler);
+            document.getElementById("btn-clear-form").addEventListener("click", confirmClearFormHandler);
+
             document.getElementById("audit-form").addEventListener("submit", handleAuditFormSubmit);
-            // 6. Tab Rekap Audit: Filter, Sync Sheets, Salin Ringkasan & Export CSV
+
+            document.getElementById("filter-periode").addEventListener("change", renderSubmissionsList);
             document.getElementById("filter-wave").addEventListener("change", renderSubmissionsList);
             document.getElementById("filter-divisi").addEventListener("change", renderSubmissionsList);
             document.getElementById("filter-keyword").addEventListener("input", renderSubmissionsList);
-            document.getElementById("btn-sync-sheets").addEventListener("click", () => syncFromGoogleSheets(true));
-            document.getElementById("btn-refresh-public-stats").addEventListener("click", () => syncFromGoogleSheets(true));
+            const runManualSync = () => {
+                skipAutoSyncUntilManual = false;
+                syncFromGoogleSheets(true);
+            };
+            document.getElementById("btn-sync-sheets").addEventListener("click", runManualSync);
+            document.getElementById("btn-refresh-public-stats").addEventListener("click", runManualSync);
+            document.getElementById("public-filter-periode").addEventListener("change", renderAdminDashboard);
             document.getElementById("public-filter-wave").addEventListener("change", renderAdminDashboard);
             document.getElementById("btn-copy-summary").addEventListener("click", copySummaryToClipboard);
             document.getElementById("btn-export-csv").addEventListener("click", exportToCSV);
 
-            // 7. Tab Pengaturan: Unlock Password & Toggle Mata Password
+            document.getElementById("submissions-list-container").addEventListener("click", (e) => {
+                const delBtn = e.target.closest(".btn-delete-entry");
+                if (!delBtn) return;
+                const entryId = delBtn.getAttribute("data-delete-entry-id");
+                const target = submissions.find(s => s.id === entryId);
+                if (!target) return;
+
+                showModal({
+                    type: "warning",
+                    title: `Hapus Laporan #${entryId}?`,
+                    message: `Laporan dari ${target.nama} (${target.divisi} — ${target.waveTitle}) akan dihapus dari tampilan dan Google Sheets.`,
+                    footerHtml: `
+                        <button type="button" id="btn-cancel-del-entry" class="tactile-btn px-4 py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-100 cursor-pointer">
+                            Batal
+                        </button>
+                        <button type="button" id="btn-confirm-del-entry" class="tactile-btn px-4 py-2 rounded-xl bg-rose-600 text-white text-xs font-bold hover:bg-rose-700 cursor-pointer">
+                            Ya, Hapus Permanen
+                        </button>
+                    `
+                });
+                document.getElementById("btn-cancel-del-entry").addEventListener("click", closeModal);
+                document.getElementById("btn-confirm-del-entry").addEventListener("click", () => {
+                    deleteSingleEntry(entryId);
+                    closeModal();
+                });
+            });
+
             document.getElementById("btn-toggle-pass-visibility").addEventListener("click", () => {
                 const inp = document.getElementById("input-unlock-password");
                 const eyeShow = document.getElementById("icon-eye-show");
@@ -2094,29 +2787,140 @@ function formatIndoDateTime(dateObj) {
                 }
             });
 
+            function loadLoginLockState() {
+                try {
+                    const raw = localStorage.getItem(LOGIN_LOCK_STORAGE_KEY);
+                    if (raw) {
+                        const parsed = JSON.parse(raw);
+                        return {
+                            attempts: Number(parsed.attempts) || 0,
+                            lockedUntil: Number(parsed.lockedUntil) || 0
+                        };
+                    }
+                } catch (e) {}
+                return { attempts: 0, lockedUntil: 0 };
+            }
+
+            function saveLoginLockState() {
+                try {
+                    localStorage.setItem(LOGIN_LOCK_STORAGE_KEY, JSON.stringify({
+                        attempts: failedLoginAttempts,
+                        lockedUntil: loginLockedUntil
+                    }));
+                } catch (e) {}
+            }
+
+            let lockState = loadLoginLockState();
+            let failedLoginAttempts = lockState.attempts;
+            let loginLockedUntil = lockState.lockedUntil;
+            let loginCountdownTimer = null;
+
+            function startLoginLockCountdown() {
+                const errEl = document.getElementById("unlock-error-msg");
+                const submitBtn = document.querySelector('#unlock-settings-form button[type="submit"]');
+                const passInput = document.getElementById("input-unlock-password");
+
+                if (loginCountdownTimer) clearInterval(loginCountdownTimer);
+
+                const updateTimerUI = () => {
+                    const sisaDetik = Math.ceil((loginLockedUntil - Date.now()) / 1000);
+                    if (sisaDetik > 0) {
+                        errEl.textContent = `Terlalu banyak percobaan gagal. Coba lagi dalam ${sisaDetik} detik.`;
+                        errEl.classList.remove("hidden");
+                        if (submitBtn) {
+                            submitBtn.disabled = true;
+                            submitBtn.classList.add("opacity-60", "cursor-not-allowed");
+                            submitBtn.textContent = `Terkunci (${sisaDetik}d)`;
+                        }
+                        if (passInput) passInput.disabled = true;
+                    } else {
+                        clearInterval(loginCountdownTimer);
+                        loginCountdownTimer = null;
+                        loginLockedUntil = 0;
+                        saveLoginLockState();
+                        errEl.textContent = "Masa tunggu selesai. Silakan masukkan password yang benar.";
+                        errEl.classList.remove("hidden");
+                        if (submitBtn) {
+                            submitBtn.disabled = false;
+                            submitBtn.classList.remove("opacity-60", "cursor-not-allowed");
+                            submitBtn.textContent = "Buka Pengaturan";
+                        }
+                        if (passInput) passInput.disabled = false;
+                    }
+                };
+
+                updateTimerUI();
+                loginCountdownTimer = setInterval(updateTimerUI, 1000);
+            }
+
+            if (loginLockedUntil > Date.now()) {
+                startLoginLockCountdown();
+            } else if (failedLoginAttempts > 0 && failedLoginAttempts < 3) {
+                const errEl = document.getElementById("unlock-error-msg");
+                errEl.textContent = `Password salah (${failedLoginAttempts}/3 kesempatan percobaan).`;
+                errEl.classList.remove("hidden");
+            }
+
             document.getElementById("unlock-settings-form").addEventListener("submit", (e) => {
                 e.preventDefault();
-                const inputPass = document.getElementById("input-unlock-password").value;
+                const now = Date.now();
                 const errEl = document.getElementById("unlock-error-msg");
+
+                if (now < loginLockedUntil) {
+                    startLoginLockCountdown();
+                    return;
+                }
+
+                const inputPass = document.getElementById("input-unlock-password").value;
                 if (inputPass === config.adminPassword) {
+                    failedLoginAttempts = 0;
+                    loginLockedUntil = 0;
+                    localStorage.removeItem(LOGIN_LOCK_STORAGE_KEY);
+                    if (loginCountdownTimer) clearInterval(loginCountdownTimer);
                     isSettingsUnlocked = true;
+                    isEditingSettings = false;
                     errEl.classList.add("hidden");
                     document.getElementById("input-unlock-password").value = "";
                     renderSettingsView();
                 } else {
-                    errEl.classList.remove("hidden");
+                    failedLoginAttempts += 1;
+                    if (failedLoginAttempts >= 3) {
+                        const penaltyLevel = failedLoginAttempts - 3;
+                        const penaltySeconds = Math.min(600, 30 * Math.pow(2, penaltyLevel));
+                        loginLockedUntil = now + penaltySeconds * 1000;
+                        saveLoginLockState();
+                        startLoginLockCountdown();
+                    } else {
+                        saveLoginLockState();
+                        errEl.textContent = `Password salah (${failedLoginAttempts}/3 kesempatan percobaan).`;
+                        errEl.classList.remove("hidden");
+                    }
                 }
             });
 
-            // 8. Tombol di Dalam Pengaturan Terbuka
+            document.getElementById("settings-unlocked-view").addEventListener("input", (e) => {
+                if (e.target.closest("#cfg-divisions-list") || e.target.closest("#cfg-waves-list") ||
+                    ["cfg-periode", "cfg-cabinet-name", "cfg-cabinet-logo", "cfg-password", "cfg-min-chars", "cfg-min-words", "cfg-sheets-url"].includes(e.target.id)) {
+                    isEditingSettings = true;
+                }
+            });
+            document.getElementById("settings-unlocked-view").addEventListener("change", (e) => {
+                if (e.target.closest("#cfg-waves-list") || e.target.closest("#cfg-divisions-list")) {
+                    persistDraftConfigNow();
+                }
+            });
+
             document.getElementById("btn-lock-settings").addEventListener("click", () => {
                 isSettingsUnlocked = false;
+                isEditingSettings = false;
                 renderSettingsView();
             });
 
             document.getElementById("btn-save-settings").addEventListener("click", async () => {
-                captureSettingsInputs();
+                captureSettingsInputs(true);
                 saveConfig();
+                isEditingSettings = false;
+                populateDivisionSelects();
                 syncHeaderAndLabels();
                 selectedWaveIdx = findFirstOpenWaveIndex();
                 renderWaveCards();
@@ -2127,6 +2931,7 @@ function formatIndoDateTime(dateObj) {
                 const origText = saveBtn.textContent;
                 saveBtn.disabled = true;
                 saveBtn.textContent = "Menyimpan ke Cloud...";
+                triggerTopProgress(true);
 
                 let cloudNote = "";
                 const sheetsUrl = (config.sheetsWebAppUrl || "").trim();
@@ -2138,10 +2943,10 @@ function formatIndoDateTime(dateObj) {
                             headers: { "Content-Type": "text/plain;charset=utf-8" },
                             body: JSON.stringify({
                                 action: "saveConfig",
-                                config: config
+                                config: buildCloudConfigPayload()
                             })
                         });
-                        cloudNote = " Perubahan otomatis tersinkron ke semua device badan pengurus.";
+                        cloudNote = " Perubahan otomatis tersinkron ke semua perangkat badan pengurus.";
                     } catch (err) {
                         cloudNote = " (Tersimpan lokal; gagal sinkron ke Google Sheets).";
                     }
@@ -2149,17 +2954,43 @@ function formatIndoDateTime(dateObj) {
 
                 saveBtn.disabled = false;
                 saveBtn.textContent = origText;
+                triggerTopProgress(false);
 
                 showModal({
                     type: "success",
                     title: "Pengaturan Berhasil Disimpan!",
-                    subtitle: `${config.periodeName} • ${config.waves.length} Gelombang`,
-                    message: `Seluruh perubahan periode, password, gelombang audit, dan pertanyaan telah diterapkan.${cloudNote}`
+                    subtitle: `${config.periodeName} • ${config.cabinetName}`,
+                    message: `Seluruh perubahan periode, kabinet, struktur, gelombang audit, dan pertanyaan telah diterapkan.${cloudNote}`
                 });
             });
-    
+
+            document.getElementById("btn-add-division").addEventListener("click", () => {
+                captureSettingsInputs(true);
+                const divs = getDivisions();
+                divs.push({ name: `Divisi Baru ${divs.length + 1}`, target: 3 });
+                config.divisions = divs;
+                saveConfig();
+                isEditingSettings = true;
+                renderSettingsView();
+            });
+
+            document.getElementById("cfg-divisions-list").addEventListener("click", (e) => {
+                const delDivBtn = e.target.closest(".btn-delete-division");
+                if (!delDivBtn) return;
+                captureSettingsInputs(true);
+                const dIdx = parseInt(delDivBtn.getAttribute("data-delete-didx"), 10);
+                const divs = getDivisions();
+                if (divs.length > 1 && !isNaN(dIdx)) {
+                    divs.splice(dIdx, 1);
+                    config.divisions = divs;
+                    saveConfig();
+                    isEditingSettings = true;
+                    renderSettingsView();
+                }
+            });
+
             document.getElementById("btn-add-wave").addEventListener("click", () => {
-                captureSettingsInputs();
+                captureSettingsInputs(true);
                 const nextNum = config.waves.length + 1;
                 config.waves.push({
                     num: nextNum,
@@ -2172,26 +3003,28 @@ function formatIndoDateTime(dateObj) {
                         { label: "3. Saran & Solusi Perbaikan", placeholder: "Tuliskan rekomendasi perbaikan..." }
                     ]
                 });
+                saveConfig();
+                isEditingSettings = true;
                 renderSettingsView();
             });
 
             document.getElementById("cfg-waves-list").addEventListener("click", (e) => {
-                // Hapus Gelombang
                 const delBtn = e.target.closest(".btn-delete-wave");
                 if (delBtn) {
-                    captureSettingsInputs();
+                    captureSettingsInputs(true);
                     const idx = parseInt(delBtn.getAttribute("data-delete-widx"), 10);
                     if (config.waves.length > 1 && !isNaN(idx)) {
                         config.waves.splice(idx, 1);
+                        saveConfig();
+                        isEditingSettings = true;
                         renderSettingsView();
                     }
                     return;
                 }
 
-                // Tambah Pertanyaan di Gelombang Tertentu
                 const addQBtn = e.target.closest(".btn-add-question");
                 if (addQBtn) {
-                    captureSettingsInputs();
+                    captureSettingsInputs(true);
                     const wIdx = parseInt(addQBtn.getAttribute("data-add-q-widx"), 10);
                     const wave = config.waves[wIdx];
                     if (wave) {
@@ -2200,52 +3033,89 @@ function formatIndoDateTime(dateObj) {
                             label: `${nextQNum}. Pertanyaan Evaluasi Tambahan`,
                             placeholder: "Tuliskan uraian jawaban secara jelas dan konstruktif..."
                         });
+                        saveConfig();
+                        isEditingSettings = true;
                         renderSettingsView();
                     }
                     return;
                 }
 
-                // Hapus Pertanyaan di Gelombang Tertentu (minimal sisakan 1)
                 const delQBtn = e.target.closest(".btn-delete-question");
                 if (delQBtn) {
-                    captureSettingsInputs();
+                    captureSettingsInputs(true);
                     const wIdx = parseInt(delQBtn.getAttribute("data-del-q-widx"), 10);
                     const qIdx = parseInt(delQBtn.getAttribute("data-del-q-qidx"), 10);
                     const wave = config.waves[wIdx];
                     if (wave && wave.questions.length > 1 && !isNaN(qIdx)) {
                         wave.questions.splice(qIdx, 1);
+                        saveConfig();
+                        isEditingSettings = true;
                         renderSettingsView();
                     }
                 }
             });
 
             document.getElementById("btn-clear-local-data").addEventListener("click", () => {
-                submissions = [];
-                saveSubmissions();
-                updateBadgeCount();
                 showModal({
-                    type: "success",
-                    title: "Data Rekap Lokal Dibersihkan",
-                    message: "Seluruh cache laporan audit di perangkat lokal ini telah dihapus."
+                    type: "warning",
+                    title: "Hapus Data Rekap Lokal?",
+                    message: "Seluruh data laporan yang tersimpan di cache perangkat lokal ini akan dihapus.",
+                    footerHtml: `
+                        <button type="button" id="btn-cancel-del-local" class="tactile-btn px-4 py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-100 cursor-pointer">
+                            Batal
+                        </button>
+                        <button type="button" id="btn-confirm-del-local" class="tactile-btn px-4 py-2 rounded-xl bg-rose-600 text-white text-xs font-bold hover:bg-rose-700 cursor-pointer">
+                            Ya, Hapus Data Rekap Lokal
+                        </button>
+                    `
+                });
+                document.getElementById("btn-cancel-del-local").addEventListener("click", closeModal);
+                document.getElementById("btn-confirm-del-local").addEventListener("click", () => {
+                    submissions = [];
+                    skipAutoSyncUntilManual = true;
+                    saveSubmissions();
+                    syncHeaderAndLabels();
+                    updateBadgeCount();
+                    renderAdminDashboard();
+                    renderSubmissionsList();
+                    closeModal();
+                    showModal({
+                        type: "success",
+                        title: "Data Rekap Lokal Terhapus",
+                        message: "Cache laporan di perangkat lokal sudah dikosongkan. Klik Sinkronisasi Sheets jika ingin menarik ulang data dari Google Sheets."
+                    });
                 });
             });
 
             document.getElementById("btn-reset-default-cfg").addEventListener("click", () => {
-                config = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
-                saveConfig();
-                syncHeaderAndLabels();
-                selectedWaveIdx = findFirstOpenWaveIndex();
-                renderWaveCards();
-                renderDynamicQuestions();
-                renderSettingsView();
                 showModal({
-                    type: "success",
-                    title: "Pengaturan Direset ke Bawaan",
-                    message: "Seluruh pengaturan telah kembali ke default awal."
+                    type: "warning",
+                    title: "Kembalikan Pengaturan ke Default?",
+                    message: "Seluruh perubahan periode, kabinet, divisi, pertanyaan, dan batas karakter akan dikembalikan ke pengaturan awal.",
+                    footerHtml: `
+                        <button type="button" id="btn-cancel-reset-cfg" class="tactile-btn px-4 py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-100 cursor-pointer">
+                            Batal
+                        </button>
+                        <button type="button" id="btn-confirm-reset-cfg" class="tactile-btn px-4 py-2 rounded-xl bg-rose-600 text-white text-xs font-bold hover:bg-rose-700 cursor-pointer">
+                            Ya, Reset Pengaturan
+                        </button>
+                    `
+                });
+                document.getElementById("btn-cancel-reset-cfg").addEventListener("click", closeModal);
+                document.getElementById("btn-confirm-reset-cfg").addEventListener("click", () => {
+                    config = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
+                    saveConfig();
+                    isEditingSettings = false;
+                    populateDivisionSelects();
+                    syncHeaderAndLabels();
+                    selectedWaveIdx = findFirstOpenWaveIndex();
+                    renderWaveCards();
+                    renderDynamicQuestions();
+                    renderSettingsView();
+                    closeModal();
                 });
             });
 
-            // 9. Modal Apps Script & Modal Umum
             document.getElementById("btn-open-gas-modal").addEventListener("click", () => {
                 const m = document.getElementById("gas-modal");
                 m.classList.remove("hidden");
@@ -2262,19 +3132,11 @@ function formatIndoDateTime(dateObj) {
 
             document.getElementById("btn-copy-gas-code").addEventListener("click", () => {
                 const code = document.getElementById("gas-script-source").innerText;
-                const ta = document.createElement("textarea");
-                ta.value = code;
-                document.body.appendChild(ta);
-                ta.select();
-                try {
-                    document.execCommand("copy");
+                copyTextModern(code, () => {
                     const btn = document.getElementById("btn-copy-gas-code");
                     btn.textContent = "✓ Tersalin!";
                     setTimeout(() => { btn.textContent = "Salin Kode"; }, 2200);
-                } catch (err) {
-                    console.error(err);
-                }
-                document.body.removeChild(ta);
+                });
             });
 
         });
